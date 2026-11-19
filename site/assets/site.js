@@ -6,80 +6,106 @@
   const mobileNav = document.getElementById("mobile-nav");
   const year = document.getElementById("copyright-year");
   const progress = document.getElementById("scroll-progress");
-  const headerLinks = [...document.querySelectorAll(".desktop-nav a")];
-  const sections = headerLinks.map((link) => document.getElementById(link.hash.slice(1))).filter(Boolean);
+  const links = [...document.querySelectorAll(".desktop-nav a")];
+  const sections = links.map(link => document.getElementById(link.hash.slice(1))).filter(Boolean);
 
-  const storedTheme = (() => {
-    try { return window.localStorage.getItem("yeop-portfolio-theme"); }
-    catch { return null; }
+  const persisted = (() => {
+    try { return window.localStorage.getItem("yeop-portfolio-theme"); } catch { return null; }
   })();
-  if (storedTheme === "light" || storedTheme === "dark") root.dataset.theme = storedTheme;
-
-  const setTheme = (theme) => {
-    const light = theme === "light";
+  if (persisted === "light" || persisted === "dark") root.dataset.theme = persisted;
+  const setTheme = value => {
+    const light = value === "light";
     root.dataset.theme = light ? "light" : "dark";
     themeButton?.setAttribute("aria-label", light ? "다크 모드로 전환" : "라이트 모드로 전환");
-    themeButton?.setAttribute("title", light ? "다크 모드" : "라이트 모드");
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = light ? "#f7f7f4" : "#0e1513";
-    try { window.localStorage.setItem("yeop-portfolio-theme", theme); }
-    catch { /* Storage may be disabled in private mode. */ }
+    themeButton?.setAttribute("title", light ? "다크 모드로 전환" : "라이트 모드로 전환");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", light ? "#f6f7f2" : "#0e1513");
+    try { window.localStorage.setItem("yeop-portfolio-theme",value); } catch {}
   };
   setTheme(root.dataset.theme === "dark" ? "dark" : "light");
   themeButton?.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark"));
 
-  const closeMenu = () => {
+  const closeMenu=()=>{
     if (!mobileNav || !menuButton) return;
     mobileNav.hidden = true;
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "모바일 메뉴 열기");
+    menuButton.setAttribute("aria-expanded","false");
+    menuButton.setAttribute("aria-label","메뉴 열기");
   };
-  menuButton?.addEventListener("click", () => {
+  menuButton?.addEventListener("click",()=>{
     if (!mobileNav) return;
-    const open = mobileNav.hidden;
-    mobileNav.hidden = !open;
-    menuButton.setAttribute("aria-expanded", String(open));
-    menuButton.setAttribute("aria-label", open ? "모바일 메뉴 닫기" : "모바일 메뉴 열기");
+    const opened=mobileNav.hidden;
+    mobileNav.hidden=!opened;
+    menuButton.setAttribute("aria-expanded",String(opened));
+    menuButton.setAttribute("aria-label",opened?"메뉴 닫기":"메뉴 열기");
   });
-  mobileNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 870) closeMenu();
-  }, { passive: true });
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeMenu();
-  });
+  mobileNav?.querySelectorAll("a").forEach(link=>link.addEventListener("click",closeMenu));
+  window.addEventListener("resize",()=>{if(window.innerWidth>1010)closeMenu();},{passive:true});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu();});
 
-  if (year) year.textContent = String(new Date().getFullYear());
-  if (progress) {
-    let scheduled = false;
-    const update = () => {
-      const fullHeight = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-      const ratio = Math.max(0, Math.min(1, window.scrollY / fullHeight));
-      progress.style.width = (ratio * 100).toFixed(2) + "%";
-      scheduled = false;
+  const filterButtons=[...document.querySelectorAll("[data-filter]")];
+  const cards=[...document.querySelectorAll(".project-card[data-kind]")];
+  const search=document.getElementById("project-search");
+  const result=document.getElementById("project-count");
+  const empty=document.getElementById("no-results");
+  let category="all";
+  const applyFilters=()=>{
+    const text=(search?.value||"").trim().toLocaleLowerCase("ko-KR");
+    let count=0;
+    for (const card of cards) {
+      const categoryMatches=category==="all"||card.dataset.kind===category;
+      const searchMatches=!text||(card.dataset.search||"").toLocaleLowerCase("ko-KR").includes(text);
+      card.hidden=!(categoryMatches&&searchMatches);
+      if(!card.hidden)count+=1;
+    }
+    if(result)result.textContent=count+"개 / 전체 "+cards.length+"개 프로젝트";
+    if(empty)empty.hidden=count!==0;
+  };
+  filterButtons.forEach(button=>button.addEventListener("click",()=>{
+    category=button.dataset.filter||"all";
+    for(const option of filterButtons){
+      const active=option===button;
+      option.classList.toggle("is-active",active);
+      option.setAttribute("aria-pressed",String(active));
+    }
+    applyFilters();
+  }));
+  search?.addEventListener("input",applyFilters);
+  document.getElementById("reset-projects")?.addEventListener("click",()=>{
+    category="all";
+    if(search)search.value="";
+    for(const option of filterButtons){
+      const active=option.dataset.filter==="all";
+      option.classList.toggle("is-active",active);
+      option.setAttribute("aria-pressed",String(active));
+    }
+    applyFilters();
+  });
+  applyFilters();
+  if (year) year.textContent=String(new Date().getFullYear());
+  if(progress){
+    let pending=false;
+    const update=()=>{
+      const extent=Math.max(1,document.documentElement.scrollHeight-window.innerHeight);
+      progress.style.width=(Math.max(0,Math.min(1,window.scrollY/extent))*100).toFixed(2)+"%";
+      pending=false;
     };
-    window.addEventListener("scroll", () => {
-      if (!scheduled) {
-        scheduled = true;
-        window.requestAnimationFrame(update);
-      }
-    }, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
+    window.addEventListener("scroll",()=>{
+      if(!pending){pending=true;window.requestAnimationFrame(update);}
+    },{passive:true});
+    window.addEventListener("resize",update,{passive:true});
     update();
   }
-
-  if ("IntersectionObserver" in window && sections.length) {
-    const observer = new IntersectionObserver((entries) => {
+  if("IntersectionObserver" in window&&sections.length){
+    const observer=new IntersectionObserver(entries=>{
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        headerLinks.forEach((link) => {
-          const current = link.hash === "#" + entry.target.id;
-          link.classList.toggle("is-current", current);
-          if (current) link.setAttribute("aria-current", "location");
+        if(!entry.isIntersecting)continue;
+        links.forEach(link=>{
+          const active=link.hash==="#"+entry.target.id;
+          link.classList.toggle("is-current",active);
+          if(active)link.setAttribute("aria-current","location");
           else link.removeAttribute("aria-current");
         });
       }
-    }, { rootMargin: "-23% 0px -62% 0px", threshold: 0 });
-    sections.forEach((section) => observer.observe(section));
+    },{rootMargin:"-20% 0px -60% 0px",threshold:0});
+    sections.forEach(section=>observer.observe(section));
   }
 })();

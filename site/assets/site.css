@@ -591,3 +591,125 @@ html[data-theme="dark"] .art-caption{color:#bed7b9}
   .facts-inner strong{font-size:18px;white-space:nowrap}
   .facts-inner span{font-size:8px}
 }
+
+/* v4 / readability and soft illustrated project backgrounds */
+:root {
+  --secondary:#46594d;
+  --quiet:#53675b;
+  --line:#d2ded4;
+}
+html[data-theme="dark"] {
+  --secondary:#d0dfd4;
+  --quiet:#b4c8b8;
+  --line:#40574a;
+}
+body {font-size:16px;line-height:1.82}
+.brand-photo {width:44px;height:44px;object-fit:cover;object-position:center 33%;border-radius:12px;border:2px solid var(--panel);box-shadow:0 3px 12px rgba(10,40,20,.16);flex:0 0 auto}
+.brand-label {font-size:19px}
+.brand-label small {font-size:11px;letter-spacing:.08em;margin-top:2px}
+.desktop-nav a {font-size:14px}
+.top-document {font-size:14px}
+.eyebrow,.kicker {font-size:13px}
+.hero .hero-description,.hero-description {font-size:17px;line-height:1.85}
+.hero .hero-meta,.hero-meta {font-size:12.5px}
+.button {font-size:14px;padding:15px 21px}
+.diagram-top,.diagram-overline,.diagram-center p,.diagram-grid span,.art-caption {font-size:12px}
+.diagram-grid b {font-size:21px}
+.facts-inner strong {font-size:33px}
+.facts-inner span {font-size:13px;line-height:1.5}
+.career-fact strong {font-size:28px;white-space:normal}
+.career-fact strong small {display:block;font-size:15px;font-weight:750;letter-spacing:-.035em;margin-top:8px;color:var(--secondary);white-space:normal}
+.intro-side p,.intro-solo {font-size:15px}
+.inline-link,.source-note {font-size:13px}
+.filter-button {font-size:13px;padding:10px 15px}
+.filter-button span {font-size:12px}
+.search-control input {font-size:14px}
+.project-results p,.project-results>span {font-size:13px}
+.project-art {isolation:isolate}
+.project-art .project-scene {position:absolute;inset:0 0 0 auto;width:70%;height:100%;opacity:.40;z-index:1;pointer-events:none;transform:scale(1.06);transform-origin:center;filter:saturate(.8)}
+.project-featured .project-scene {opacity:.44}
+.tone-devops .project-scene {opacity:.31}
+.project-art-main {position:relative;z-index:2}
+.project-art-top,.project-art-bottom {font-size:12px;line-height:1.4;z-index:3}
+.project-art-main .art-seq {opacity:.26;font-size:102px}
+.project-art-main .art-motif {font-size:25px;border-width:1.7px;opacity:.9;backdrop-filter:blur(2px)}
+.project-top {font-size:13px}
+.project-top a {font-size:22px}
+.project-content h3 {font-size:27px;line-height:1.4}
+.project-period {font-size:14px;line-height:1.65}
+.project-summary {font-size:15.5px;line-height:1.85}
+.project-role>span {font-size:13px}
+.project-role strong {font-size:14px}
+.tech-list span {font-size:12.5px;padding:7px 10px}
+.project-details summary {font-size:15px;padding:18px 0 10px}
+.details-body h4 {font-size:14px}
+.details-body li {font-size:14px;line-height:1.84}
+.details-body>a {font-size:13.5px}
+.no-results p,.no-results button {font-size:14px}
+.career-heading>p:not(.kicker),.career-note {font-size:14px}
+.timeline-row>span {font-size:13px}
+.timeline-row h3 {font-size:20px}
+.timeline-row p {font-size:14px}
+.skill-panel-title span {font-size:13px}
+.skill-panel-title h3 {font-size:21px}
+.skill-tags span {font-size:13.5px}
+.about-layout>div:first-child>p:not(.kicker),.about-points p {font-size:14.5px}
+.about-points article>span {font-size:12.5px}
+.about-points h3 {font-size:21px}
+.side-heading p:not(.kicker) {font-size:14px}
+.side-link>div:nth-child(2)>span {font-size:11px}
+.side-link h3 {font-size:16px}
+.side-link p {font-size:13px}
+.side-letter {overflow:hidden;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel);display:grid;place-items:center}
+.side-letter img {display:block;width:100%;height:100%;object-fit:contain;object-position:center;border-radius:7px}
+.side-letter-mir,.side-letter-idol,.side-letter-radar {background:var(--panel)}
+.contact-section p:not(.kicker),.contact-links a {font-size:15px}
+.footer-inner p,.top-link {font-size:13px}
+.mobile-nav a {font-size:16px}
+@media (max-width:870px){
+  .facts-inner strong {font-size:26px}
+  .facts-inner span {font-size:12.5px}
+  .career-fact strong {font-size:24px}
+  .career-fact strong small {font-size:13.5px}
+  .hero-description {font-size:16px}
+  .project-content h3 {font-size:26px}
+}
+@media (max-width:650px){
+  .facts-inner {grid-template-columns:1fr 1fr}
+  .facts-inner>div:nth-child(1) {grid-column:1;grid-row:1}
+  .facts-inner>div:nth-child(2) {grid-column:1 / -1;grid-row:2;border-right:0;border-top:1px solid var(--line);padding:17px 0}
+  .facts-inner>div:nth-child(3) {grid-column:2;grid-row:1;border-right:0}
+  .facts-inner>div {min-height:99px;padding:15px 12px}
+  .facts-inner strong {font-size:23px}
+  .facts-inner span {font-size:12.5px}
+  .career-fact strong {font-size:29px}
+  .career-fact strong small {font-size:15px;display:inline;letter-spacing:-.015em}
+  .project-art .project-scene {width:74%;opacity:.42}
+}
+@media (max-width:580px){
+  .brand-photo {width:40px;height:40px}
+  .brand-label {font-size:18px}
+  .brand-label small {font-size:10.5px}
+  .eyebrow,.kicker {font-size:12.5px}
+  .hero .hero-description,.hero-description {font-size:15.5px}
+  .hero .hero-meta,.hero-meta {font-size:12px}
+  .button {font-size:13px}
+  .project-art-top,.project-art-bottom {font-size:11.5px}
+  .project-art-main .art-seq {font-size:85px}
+  .project-art-main .art-motif {font-size:21px}
+  .project-content h3 {font-size:25px}
+  .project-period,.project-role strong,.project-summary,.details-body li {font-size:14px}
+  .project-role>span,.tech-list span,.project-top {font-size:12.5px}
+  .project-details summary {font-size:14.5px}
+  .filter-button {font-size:12px}
+  .search-control input {font-size:14px}
+  .timeline-row>span {font-size:12px}
+  .timeline-row p {font-size:13.5px}
+  .skill-panel-title h3 {font-size:19px}
+  .skill-tags span {font-size:13px}
+  .side-link h3 {font-size:15px}
+  .side-link p {font-size:12.5px}
+  .side-link>div:nth-child(2)>span {font-size:10.5px}
+  .contact-links a,.contact-section p:not(.kicker) {font-size:14px}
+  .footer-inner p,.top-link {font-size:12px}
+}

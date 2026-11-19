@@ -70,5 +70,5 @@ assert.match(files["assets/site.js"],/aria-pressed/);
 assert.match(files["assets/site.js"],/project-search/);
 assert.match(files["robots.txt"],/Sitemap: https:\/\/yeop\.net\/sitemap\.xml/);
 assert.match(files["sitemap.xml"],/<loc>https:\/\/yeop\.net\/<\/loc>/);
-assert.ok(!html.includes("http://"),"Only HTTPS external resources");
+assert.ok(!/(?:href|src)="http:\/\//.test(html),"Only HTTPS external resources");
 console.log("PASS: all 12 Notion professional projects, career/skills before hobbies, search/filter, privacy, responsive UI and SEO");

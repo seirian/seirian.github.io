@@ -3,22 +3,22 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root=path.resolve("site");
-const expected=["index.html","assets/site.css","assets/site.js","assets/favicon.svg","robots.txt","sitemap.xml"];
+const expected=["index.html","assets/site.css","assets/site.js","assets/favicon.svg","assets/avatar-yeop.webp","robots.txt","sitemap.xml"];
 const files=Object.fromEntries(expected.map(name=>{
   const file=path.join(root,name);
   const stat=fs.lstatSync(file);
   assert.ok(stat.isFile()&&!stat.isSymbolicLink(),"Invalid asset: "+name);
   assert.ok(stat.size>0 && stat.size<180_000,"Invalid asset size: "+name);
-  return [name,fs.readFileSync(file,"utf8")];
+  return [name,name.endsWith(".webp")?fs.readFileSync(file):fs.readFileSync(file,"utf8")];
 }));
 const html=files["index.html"];
 assert.match(html,/<html lang="ko"/);
-assert.match(html,/data-site="yeop-portfolio-v3"/);
+assert.match(html,/data-site="yeop-portfolio-v4"/);
 assert.match(html,/<main id="main">/);
 assert.match(html,/<h1 id="hero-title">/);
 assert.match(html,/<title>.+<\/title>/);
 assert.match(html,/https:\/\/yeop\.net\//);
-for(const asset of ['href="/assets/site.css"','src="/assets/site.js"','href="/assets/favicon.svg"']){
+for(const asset of ['href="/assets/site.css"','src="/assets/site.js"','href="/assets/favicon.svg"','src="/assets/avatar-yeop.webp"']){
   assert.ok(html.includes(asset),"Missing reference: "+asset);
 }
 for(const id of ["work","career","skills","about","side","contact"]){
@@ -47,10 +47,21 @@ assert.ok(html.includes("2012.06.01 ~ 2012.12.31"));
 assert.ok(html.includes("2023.08.07 ~ 2026.02.27"));
 for(const url of [
 "https://mir.yeop.net/",
-"https://github.com/seirian/isegye-idol-fansite",
+"https://isegye-idol.kr/",
 "https://subculture-radar-kr-sy.goodvale15.chatgpt.site/",
 "https://yeops.notion.site/Portfolio-a13980c2a70b4f1f9e32e2f1b80fc193"
 ])assert.ok(html.includes(url),"Missing link: "+url);
+assert.equal((html.match(/class="project-scene"/g)||[]).length,12,"Each professional project needs distinct illustration");
+assert.ok(html.includes('13년 8개월'),"Career length must be exact sum of actual periods");
+assert.ok(html.includes('(2012.03 ~ 2026.02)'),"Career period must be explicit");
+assert.ok(html.includes('개발 경력 기간'),"Career section wording must be clear");
+assert.ok(html.includes('함께 고민하겠습니다.'),"Requested contact wording is missing");
+assert.ok(!html.includes('함께 고민해요.'),"Old contact wording remains");
+assert.ok(html.includes('src="https://mir.yeop.net/_yeop_releases/'),"Original MIR logo must be used");
+assert.ok(html.includes('raw.githubusercontent.com/seirian/isegye-idol-fansite/main/assets/favicon.svg'),"Use original ISEGYE favicon asset");
+assert.ok(html.includes('subculture-radar-kr-sy.sengyb.chatgpt.site/favicon.svg'),"Use live Subradar favicon");
+assert.equal(files["assets/avatar-yeop.webp"].toString("ascii",0,4),"RIFF","Notion portrait must be real WEBP");
+assert.ok(files["assets/avatar-yeop.webp"].length>1000,"Notion portrait is unexpectedly small");
 assert.ok(!html.includes("1984. 09. 25"),"Do not publish birth date");
 assert.ok(!html.includes("남부순환로"),"Do not publish home address");
 assert.match(files["assets/site.css"],/@media \(max-width:580px\)/);

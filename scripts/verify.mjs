@@ -2,53 +2,62 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 
-const root = path.resolve("site");
-const expected = ["index.html","assets/site.css","assets/site.js","assets/favicon.svg","robots.txt","sitemap.xml"];
-const files = Object.fromEntries(expected.map((name) => {
-  const file = path.join(root,name);
-  const stat = fs.lstatSync(file);
-  assert.ok(stat.isFile() && !stat.isSymbolicLink(), "Invalid asset: " + name);
-  assert.ok(stat.size > 0 && stat.size < 180_000, "Invalid asset size: " + name);
-  return [name, fs.readFileSync(file,"utf8")];
+const root=path.resolve("site");
+const expected=["index.html","assets/site.css","assets/site.js","assets/favicon.svg","robots.txt","sitemap.xml"];
+const files=Object.fromEntries(expected.map(name=>{
+  const file=path.join(root,name);
+  const stat=fs.lstatSync(file);
+  assert.ok(stat.isFile()&&!stat.isSymbolicLink(),"Invalid asset: "+name);
+  assert.ok(stat.size>0 && stat.size<180_000,"Invalid asset size: "+name);
+  return [name,fs.readFileSync(file,"utf8")];
 }));
-const html = files["index.html"];
-assert.match(html, /<html lang="ko"/);
-assert.match(html, /data-site="yeop-portfolio-v2"/);
-assert.match(html, /<main id="main">/);
-assert.match(html, /<h1 id="hero-title">/);
-assert.match(html, /<title>.+<\/title>/);
-assert.match(html, /https:\/\/yeop\.net\//);
-assert.match(html, /href="\/assets\/site\.css"/);
-assert.match(html, /src="\/assets\/site\.js"/);
-assert.match(html, /href="\/assets\/favicon\.svg"/);
-for (const id of ["work", "experience", "approach", "side", "contact"]) {
-  assert.ok(html.includes('id="' + id + '"'), "Missing section: " + id);
+const html=files["index.html"];
+assert.match(html,/<html lang="ko"/);
+assert.match(html,/data-site="yeop-portfolio-v3"/);
+assert.match(html,/<main id="main">/);
+assert.match(html,/<h1 id="hero-title">/);
+assert.match(html,/<title>.+<\/title>/);
+assert.match(html,/https:\/\/yeop\.net\//);
+for(const asset of ['href="/assets/site.css"','src="/assets/site.js"','href="/assets/favicon.svg"']){
+  assert.ok(html.includes(asset),"Missing reference: "+asset);
 }
-const primaryCases = ["project-air","project-water","project-haps","project-plan"];
-for (const id of primaryCases) {
-  assert.ok(html.includes('id="' + id + '"'), "Missing professional project: " + id);
-  assert.ok(html.includes('href="#' + id + '"'), "Missing project navigation: " + id);
+for(const id of ["work","career","skills","about","side","contact"]){
+  assert.ok(html.includes('id="'+id+'"'),"Missing section: "+id);
+  assert.ok(html.includes('href="#'+id+'"'),"Missing section link: "+id);
 }
-assert.equal((html.match(/class="case-card(?:\s|\")/g) || []).length, 4,
-  "Four verified professional cases required");
-assert.equal((html.match(/class="side-link"/g) || []).length, 3,
-  "Hobby projects must be limited to three compact secondary links");
-assert.ok(html.indexOf('id="project-air"') < html.indexOf('id="side"'), "Work must precede hobby projects");
-assert.ok(html.indexOf('id="experience"') < html.indexOf('id="side"'), "Career must precede hobbies");
-assert.match(html, /실무 개발 과제/);
-assert.match(html, /AS-IS → TO-BE/);
-assert.match(html, /HAPs운영일지/);
-assert.match(html, /완료 여부·기여 범위·정량 성과는 단정하지 않았습니다/);
-for (const url of [
- "https://mir.yeop.net/",
- "https://github.com/seirian/isegye-idol-fansite",
- "https://subculture-radar-kr-sy.goodvale15.chatgpt.site/",
- "https://yeops.notion.site/Portfolio-a13980c2a70b4f1f9e32e2f1b80fc193"
-]) assert.ok(html.includes(url), "Missing source link " + url);
-assert.match(files["assets/site.css"], /@media \(max-width:580px\)/);
-assert.match(files["assets/site.css"], /prefers-reduced-motion/);
-assert.match(files["assets/site.js"], /aria-current/);
-assert.match(files["robots.txt"], /Sitemap: https:\/\/yeop\.net\/sitemap\.xml/);
-assert.match(files["sitemap.xml"], /<loc>https:\/\/yeop\.net\/<\/loc>/);
-assert.ok(!html.includes("http://"), "HTTPS only external content");
-console.log("PASS: professional-first layout, four cases, separated hobby projects, assets, responsive UI and metadata");
+const projectIds=[
+ "sme","kb-fcc","fitpet","eqst","groupware","learningpro",
+ "judicial","kifin","health-edu","startup-school","avalon","samsung-learning",
+];
+assert.equal((html.match(/class="project-card /g)||[]).length,12,"Exact 12 Notion projects required");
+for(const project of projectIds){
+  assert.ok(html.includes('id="project-'+project+'"'),"Missing real project: "+project);
+  assert.ok(html.includes('href="#project-'+project+'"'),"Missing deep link: "+project);
+}
+assert.equal((html.match(/class="side-link"/g)||[]).length,3,"Exactly 3 compact hobby links");
+assert.ok(html.indexOf('id="project-sme"')<html.indexOf('id="side"'),"Professional work must precede hobbies");
+assert.ok(html.indexOf('id="career"')<html.indexOf('id="side"'),"Career must precede hobbies");
+assert.ok(html.indexOf('id="skills"')<html.indexOf('id="side"'),"Skills must precede hobbies");
+for(const project of [
+"중소기업중앙회","KB FCC","핏펫","EQST LMS","러닝프로",
+"사법연수원","금융투자협회","보건산업교육본부","창업스쿨",
+"아발론","삼성전자 러닝허브"
+])assert.ok(html.includes(project),"Missing Notion work title: "+project);
+assert.ok(html.includes("2012.06.01 ~ 2012.12.31"));
+assert.ok(html.includes("2023.08.07 ~ 2026.02.27"));
+for(const url of [
+"https://mir.yeop.net/",
+"https://github.com/seirian/isegye-idol-fansite",
+"https://subculture-radar-kr-sy.goodvale15.chatgpt.site/",
+"https://yeops.notion.site/Portfolio-a13980c2a70b4f1f9e32e2f1b80fc193"
+])assert.ok(html.includes(url),"Missing link: "+url);
+assert.ok(!html.includes("1984. 09. 25"),"Do not publish birth date");
+assert.ok(!html.includes("남부순환로"),"Do not publish home address");
+assert.match(files["assets/site.css"],/@media \(max-width:580px\)/);
+assert.match(files["assets/site.css"],/prefers-reduced-motion/);
+assert.match(files["assets/site.js"],/aria-pressed/);
+assert.match(files["assets/site.js"],/project-search/);
+assert.match(files["robots.txt"],/Sitemap: https:\/\/yeop\.net\/sitemap\.xml/);
+assert.match(files["sitemap.xml"],/<loc>https:\/\/yeop\.net\/<\/loc>/);
+assert.ok(!html.includes("http://"),"Only HTTPS external resources");
+console.log("PASS: all 12 Notion professional projects, career/skills before hobbies, search/filter, privacy, responsive UI and SEO");

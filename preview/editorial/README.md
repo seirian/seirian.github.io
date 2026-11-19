@@ -2,7 +2,7 @@
 
 A deliberately quiet, human-readable alternative to the production portfolio.
 
-**Public preview:** https://yeop.net/_portfolio_previews/editorial-20261119/index.html
+**Public preview:** https://yeop.net/_portfolio_previews/editorial-20261119-v2/index.html
 
 ## Direction
 - No giant numerals, gradients, stock imagery, abstract engineering illustration cards, animated counters, or ornamental metrics.
@@ -15,6 +15,6 @@ A deliberately quiet, human-readable alternative to the production portfolio.
 - Desktop sticky contents and sensible small-screen single-column layout.
 - Explicit review banner and robots noindex/nofollow.
 
-This is a **review-only artifact**. The source lives under `develop/preview/editorial/` and is published to `/_portfolio_previews/editorial-20261119/` using a separate, allowlisted upload job. It never modifies `/web/.htaccess`, the production `main` release, or `mir.yeop.net`.
+This is a **review-only artifact**. The source lives under `develop/preview/editorial/` and is published to `/_portfolio_previews/editorial-20261119-v2/` using a separate, allowlisted upload job. It never modifies `/web/.htaccess`, the production `main` release, or `mir.yeop.net`.
 
 The design is original, not a copy of the GitHub profile or the separate portfolio site at https://sch0718.github.io/profile/. Its reference role was only the preference for clear chronology and plain technical prose.

@@ -1,0 +1,54 @@
+name: Portfolio quality gate
+
+on:
+  push:
+    branches: [develop, main]
+    paths:
+      - 'site/**'
+      - 'scripts/**'
+      - 'package.json'
+      - '.github/workflows/quality.yml'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Validate source and JS syntax
+        run: npm run verify
+      - name: Build reproducible static output
+        run: npm run build
+      - name: Confirm no server-side code or unintended files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          files = {p.relative_to('dist').as_posix() for p in Path('dist').rglob('*') if p.is_file()}
+          expected = {'index.html','assets/site.css','assets/site.js','assets/favicon.svg','robots.txt','sitemap.xml'}
+          assert files == expected,(files,expected)
+          assert b'data-site="yeop-portfolio-v1"' in Path('dist/index.html').read_bytes()
+          print('Validated publication manifest:',sorted(files))
+          PY
+      - name: Archive main only for release audit
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: portfolio-main-${{ github.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 30

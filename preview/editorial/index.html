@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="color-scheme" content="light">
+<meta name="description" content="정성엽 개발자 포트폴리오 · 단정한 편집형 검토 시안. 운영 사이트를 변경하지 않습니다.">
+<meta http-equiv="X-Robots-Tag" content="noindex,nofollow">
+<title>정성엽 | 포트폴리오 검토 시안 — Editorial</title>
+<style>
+:root{--paper:#f9f9f7;--white:#fff;--ink:#202529;--muted:#515b60;--subtle:#6b7579;--rule:#dcdfdc;--line-strong:#aab6b2;--accent:#214e58;--accent-light:#e8eeec}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{background:var(--paper);color:var(--ink);font:16px/1.78 "Pretendard Variable","Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;-webkit-font-smoothing:antialiased;margin:0;min-width:320px}
+button,input{font:inherit}button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+p,h1,h2,h3{margin-top:0}
+p{word-break:keep-all}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+::selection{color:#fff;background:var(--accent)}
+[hidden]{display:none!important}
+.skip-link{position:absolute;top:-70px;left:10px;padding:8px 16px;background:var(--accent);color:#fff;z-index:100}.skip-link:focus{top:10px}
+.container{width:min(1130px,calc(100% - 56px));margin:auto}
+.review-banner{border-bottom:1px solid var(--rule);background:#f0f3f0;color:#485a50;font-size:13px}
+.review-banner .container{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:9px 0}
+.review-banner strong{font-weight:750;color:#315c4a}
+.review-banner a{text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:73px;padding-top:78px;padding-bottom:120px}
+.sidebar{align-self:start;position:sticky;top:45px;min-width:0}
+.portrait{width:95px;height:95px;border:1px solid #cbd0cb;border-radius:50%;display:block;object-fit:cover;object-position:center 37%;background:#e1e9dc;margin-bottom:23px}
+.identity{font-size:25px;line-height:1.2;letter-spacing:-.045em;margin:0 0 7px;font-weight:780}
+.role{font-size:15px;color:var(--muted);margin:0 0 30px}
+.side-rule{border:0;border-top:1px solid var(--rule);margin:0 0 21px}
+.side-nav{display:flex;flex-direction:column;gap:4px;margin-bottom:29px}
+.side-nav a{font-size:15px;padding:7px 0;color:#405052;display:flex;align-items:center;gap:14px}
+.side-nav a:hover,.side-nav a[aria-current]{color:var(--accent);font-weight:750}
+.side-nav .nav-num{width:18px;color:#83908d;font:600 12px/1.4 ui-monospace,SFMono-Regular,Consolas,monospace}
+.contact-side{display:flex;flex-direction:column;gap:8px}
+.contact-side a{color:#3e5757;text-decoration:underline;text-underline-offset:4px;font-size:14px;overflow-wrap:anywhere}
+.sidebar-foot{color:var(--subtle);font-size:13px;margin:30px 0 0}
+.mobile-head{display:none}
+.content{min-width:0}
+.intro{padding-bottom:83px;border-bottom:1px solid var(--rule)}
+.kicker{font:650 13px/1.6 ui-monospace,SFMono-Regular,Consolas,"Malgun Gothic",monospace;color:var(--accent);letter-spacing:.02em;margin:0 0 22px}
+.intro h1{font-size:clamp(35px,4vw,53px);letter-spacing:-.065em;line-height:1.32;font-weight:800;margin:0 0 29px;max-width:710px}
+.intro p.lead{font-size:17px;line-height:1.96;color:#3a4548;max-width:680px;margin-bottom:24px;word-break:keep-all}
+.intro-links{display:flex;gap:12px 27px;flex-wrap:wrap;font-size:15px;margin-top:32px}
+.intro-links a{color:var(--accent);text-decoration:underline;text-underline-offset:4px;font-weight:700}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:45px 0 0;border-top:1px solid var(--rule);padding-top:21px}
+.fact-label{font-size:13px;color:var(--muted);margin:0 0 4px}
+.fact-value{font-size:22px;font-weight:750;letter-spacing:-.05em;line-height:1.5;margin:0}
+.fact-value small{font-size:14px;color:var(--muted);font-weight:500;letter-spacing:0;display:block}
+.section{padding:76px 0 0;border-bottom:1px solid var(--rule)}
+.section:last-of-type{border-bottom:0}
+.section-hd{display:flex;align-items:baseline;justify-content:space-between;gap:18px;margin-bottom:25px}
+.section h2{font-size:28px;letter-spacing:-.05em;line-height:1.4;margin:0;font-weight:770}
+.section-hd .count{font-size:14px;color:var(--muted)}
+.section-intro{font-size:15px;color:var(--muted);line-height:1.9;margin:12px 0 32px;max-width:700px}
+.tabs{display:flex;gap:20px;flex-wrap:wrap;border-bottom:1px solid var(--rule);margin-bottom:4px}
+.tab{border:0;background:none;color:var(--muted);font-size:14px;padding:12px 0 13px;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.active,.tab[aria-pressed=true]{color:var(--ink);border-color:var(--ink);font-weight:800}
+.tab:hover{color:var(--accent)}
+.project-list{display:block}
+.project-entry{display:grid;grid-template-columns:152px minmax(0,1fr);gap:27px;padding:30px 0 32px;border-bottom:1px solid var(--rule)}
+.project-entry:last-child{border-bottom:0}
+.project-date{padding-top:4px}
+.project-date>span{display:block;font-size:12px;line-height:1.65;color:#516167;white-space:pre-line;word-break:keep-all}
+.project-date small{display:block;color:#7a8584;font-size:12px;line-height:1.6;margin-top:10px}
+.project-details-area{min-width:0}
+.project-line{display:flex;gap:10px;align-items:start;justify-content:space-between}
+.project-line h3{font-size:20px;font-weight:770;line-height:1.48;letter-spacing:-.035em;margin:0}
+.anchor{color:#9aa6a3;font-size:15px;margin-left:12px}
+.anchor:hover{color:var(--accent)}
+.project-summary{font-size:15px;color:#3b464c;line-height:1.88;margin:13px 0 12px}
+.project-context{font-size:13.5px;color:#576369;margin:0 0 8px}
+.project-context span{font-weight:750;color:#3d5255;margin-right:5px}
+.project-stack{font-size:13.5px;color:#345a62;line-height:1.75;margin:0 0 10px;overflow-wrap:anywhere}
+.project-expand{margin:0}
+.project-expand summary{cursor:pointer;display:inline-flex;gap:9px;align-items:center;padding:6px 0;font-size:14px;color:var(--accent);font-weight:700;list-style:none}
+.project-expand summary::-webkit-details-marker{display:none}
+.project-expand summary span{font-size:20px;line-height:1;transition:transform .2s}
+.project-expand[open] summary span{transform:rotate(45deg)}
+.detail-body{padding:10px 0 1px}
+.detail-body ul{padding-left:21px;margin:0 0 10px}
+.detail-body li{color:#425056;line-height:1.9;font-size:14.5px;margin-bottom:7px;word-break:keep-all}
+.empty{padding:28px 0;font-size:15px;color:var(--muted)}
+.timeline{border-top:1px solid var(--rule);margin-top:33px}
+.career-row{display:grid;grid-template-columns:165px minmax(0,1fr);gap:25px;border-bottom:1px solid var(--rule);padding:24px 0}
+.career-row time{font-size:13px;color:#566167;line-height:1.7}
+.career-row h3{font-size:18px;margin:0 0 6px;letter-spacing:-.03em;font-weight:750}
+.career-row p{font-size:14.5px;color:#566167;margin:0;line-height:1.85}
+.skills{display:grid;grid-template-columns:130px 1fr;gap:18px 30px;margin:27px 0 40px}
+.skills dt{font-weight:750;color:#34474c;font-size:14.5px}
+.skills dd{margin:0;font-size:15px;line-height:1.9;color:#4c575a}
+.note{font-size:13px;color:var(--subtle);line-height:1.85;margin:20px 0 25px}
+.philosophy p{font-size:15.5px;line-height:1.95;color:#465357;margin:15px 0 17px}
+.side-projects{margin-top:18px}
+.side-project{display:flex;align-items:center;gap:13px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.side-project:last-child{border-bottom:0}
+.side-project img{height:42px;width:42px;object-fit:contain;border-radius:10px;border:1px solid var(--rule);padding:4px;background:#fff}
+.side-project strong{display:block;font-weight:750;font-size:15px;line-height:1.4}
+.side-project span{display:block;color:var(--muted);font-size:13px}
+.side-project .arrow{margin-left:auto;font-size:18px;color:var(--accent)}
+.contact-section{margin-top:84px;padding:33px 0 0;border-top:1px solid var(--rule)}
+.contact-section h2{font-size:23px;line-height:1.5;margin:0 0 12px}
+.contact-section p{color:#465357;font-size:15px;line-height:1.85}
+.contact-section a{color:var(--accent);text-decoration:underline;text-underline-offset:4px}
+.footer{border-top:1px solid var(--rule);margin-top:82px;padding:20px 0;color:var(--subtle);font-size:12.5px}
+@media(max-width:920px){
+  .container{width:min(780px,calc(100% - 40px))}
+  .layout{grid-template-columns:1fr;gap:35px;padding-top:38px}
+  .sidebar{position:static;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:66px 1fr;gap:0 18px;padding-bottom:24px}
+  .portrait{grid-row:span 2;width:66px;height:66px;margin-bottom:0}
+  .identity{font-size:23px;margin-top:3px}
+  .role{margin:0}
+  .side-rule{display:none}
+  .side-nav{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:16px;margin:22px 0 12px}
+  .side-nav a{font-size:14px;padding:0}
+  .side-nav .nav-num{display:none}
+  .contact-side{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;gap:15px}
+  .sidebar-foot{display:none}
+}
+@media(max-width:640px){
+  .container{width:calc(100% - 32px)}
+  .review-banner .container{font-size:12px}
+  .intro{padding-bottom:55px}
+  .intro h1{font-size:clamp(34px,8.7vw,44px)}
+  .intro p.lead{font-size:16px}
+  .facts{grid-template-columns:1fr;gap:13px}
+  .fact-value{font-size:21px}
+  .section{padding-top:61px}
+  .project-entry{display:block;padding:25px 0}
+  .project-date{display:flex;align-items:baseline;gap:13px;margin-bottom:8px}
+  .project-date>span,.project-date small{font-size:12.5px;margin:0}
+  .project-line h3{font-size:19px}
+  .project-summary{font-size:14.5px}
+  .project-context,.project-stack{font-size:13px}
+  .career-row{grid-template-columns:1fr;gap:4px}
+  .career-row time{font-size:13px}
+  .skills{grid-template-columns:1fr;gap:5px;margin:20px 0 33px}
+  .skills dd{margin-bottom:17px}
+  .tabs{gap:13px}
+  .tab{font-size:12.5px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">본문 바로가기</a>
+<div class="review-banner"><div class="container"><span><strong>디자인 검토 시안</strong> · 운영 사이트에는 적용되지 않았습니다.</span><a href="https://yeop.net/" target="_blank" rel="noopener noreferrer">기존 사이트 보기 ↗</a></div></div>
+<div class="container layout">
+<aside class="sidebar" aria-label="프로필과 사이트 내비게이션">
+ <img src="./avatar-yeop.webp" class="portrait" width="95" height="95" alt="Notion 포트폴리오의 밀짚모자 프로필 사진">
+ <h2 class="identity">정성엽</h2>
+ <p class="role">Backend Developer</p>
+ <hr class="side-rule">
+ <nav class="side-nav" aria-label="페이지 목차">
+  <a href="#work"><span class="nav-num">01</span>업무 프로젝트</a>
+  <a href="#career"><span class="nav-num">02</span>경력</a>
+  <a href="#skills"><span class="nav-num">03</span>기술</a>
+  <a href="#about"><span class="nav-num">04</span>소개</a>
+  <a href="#side"><span class="nav-num">05</span>개인 프로젝트</a>
+ </nav>
+ <div class="contact-side">
+  <a href="mailto:sengyb@daum.net">sengyb@daum.net</a>
+  <a href="https://github.com/seirian" target="_blank" rel="noopener noreferrer">github.com/seirian</a>
+  <a href="https://yeops.notion.site/Portfolio-a13980c2a70b4f1f9e32e2f1b80fc193" target="_blank" rel="noopener noreferrer">Notion 포트폴리오 ↗</a>
+ </div>
+ <p class="sidebar-foot">원본 Notion 기재 경력 기준<br>2026.11 · 디자인 검토</p>
+</aside>
+<main id="main" class="content">
+ <header class="intro">
+  <p class="kicker">DEVELOPER PORTFOLIO</p>
+  <h1>안녕하세요.<br>백엔드 개발자 정성엽입니다.</h1>
+  <p class="lead">Java와 Spring 기반으로 업무 시스템을 개발하고 운영해 왔습니다. 교육 서비스, 사내 시스템, 금융권 API, 헬스케어 서비스에서 새로운 기능을 만들고 기존 구조를 개선하는 일을 해왔습니다.</p>
+  <p class="lead">그동안 참여한 프로젝트와 맡았던 업무를 사실 위주로 정리했습니다.</p>
+  <div class="intro-links"><a href="#work">프로젝트 살펴보기 ↘</a><a href="mailto:sengyb@daum.net">이메일 보내기 ↗</a></div>
+  <div class="facts">
+   <div><p class="fact-label">개발 경력 기간</p><p class="fact-value">13년 8개월<small>2012.03 ~ 2026.02 · Notion 기록 기준</small></p></div>
+   <div><p class="fact-label">업무 기록</p><p class="fact-value">12개 프로젝트<small>Java · Spring Boot · 시스템 운영</small></p></div>
+  </div>
+ </header>
+ <section class="section" id="work">
+  <div class="section-hd"><h2>업무 프로젝트</h2><span class="count">총 12개</span></div>
+  <p class="section-intro">최근 프로젝트부터 순서대로 정리했습니다. 제목 아래의 담당 업무를 펼치면 실제 수행 내용과 사용 기술을 확인할 수 있습니다.</p>
+  <div class="tabs" role="group" aria-label="프로젝트 분야 선택">
+   <button class="tab active" type="button" data-category-filter="all" aria-pressed="true">전체</button>
+   <button class="tab" type="button" data-category-filter="backend" aria-pressed="false">백엔드 · API</button>
+   <button class="tab" type="button" data-category-filter="devops" aria-pressed="false">인프라</button>
+   <button class="tab" type="button" data-category-filter="operations" aria-pressed="false">운영</button>
+   <button class="tab" type="button" data-category-filter="education" aria-pressed="false">교육</button>
+  </div>
+  <div class="project-list">
+<article class="project-entry" id="project-sme" data-category="operations" data-keywords="중소기업중앙회 시스템 유지보수 공공 · 운영 중소기업중앙회의 여러 대외·대내 시스템을 운영하면서 취업 플랫폼 api 연계와 기업 정보 데이터 가공을 수행했습니다. 프리랜서로 개별 업무 진행 2023.08.07 ~ 2026.02.27 java spring-boot mysql mybatis oracle db2 참괜찮은중소기업 시스템 유지보수 각 취업사이트(잡코리아, 아이원잡, 워크넷, 사람인, 인크루트) api 연계 작업 한국평가데이터(kodata) 기업 정보 데이터 가공 추가 작업 온라인조사시스템 유지보수 공제기금 홈페이지 시스템 유지보수 파란/보증/pl 홈페이지 시스템 유지보수">
+  <div class="project-date"><span>2023.08.07 ~ 2026.02.27</span><small>공공 · 운영</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>중소기업중앙회 시스템 유지보수</h3><a class="anchor" href="#project-sme" aria-label="중소기업중앙회 시스템 유지보수 링크">#</a></div>
+    <p class="project-summary">중소기업중앙회의 여러 대외·대내 시스템을 운영하면서 취업 플랫폼 API 연계와 기업 정보 데이터 가공을 수행했습니다.</p>
+    <p class="project-context"><span>참여</span> 프리랜서로 개별 업무 진행</p>
+    <p class="project-stack">Java  ·  Spring-Boot  ·  MySQL  ·  MyBatis  ·  Oracle  ·  DB2</p>
+    <details class="project-expand" open>
+      <summary>담당 업무 접기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>참괜찮은중소기업 시스템 유지보수</li><li>각 취업사이트(잡코리아, 아이원잡, 워크넷, 사람인, 인크루트) API 연계 작업</li><li>한국평가데이터(kodata) 기업 정보 데이터 가공 추가 작업</li><li>온라인조사시스템 유지보수</li><li>공제기금 홈페이지 시스템 유지보수</li><li>파란/보증/PL 홈페이지 시스템 유지보수</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-kb-fcc" data-category="backend" data-keywords="kb fcc 콜인프라 도입(stt/ta 구축) 금융 · api kb 금융 계열사의 stt/ta 연계를 위한 ta gateway api와 sftp·db 내보내기 공통 모듈을 개발했습니다. 프리랜서로 개별 업무 진행 2022.12.01 ~ 2023.06.30 java spring-boot mysql mybatis aws(ec2,ecs) d&amp;#39;amo kb저축은행 데이터 분석 작업 진행 kb계열사(은행, 카드, 저축은행, 손해보험, 증권, 라이프생명) ta gateway api 백엔드 개발 공통 모듈(sftp 다운로드/업로드, db table data export) 개발 d`amo 파일 암호화 솔루션 적용 및 관련 로직 개발">
+  <div class="project-date"><span>2022.12.01 ~ 2023.06.30</span><small>금융 · API</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>KB FCC 콜인프라 도입(STT/TA 구축)</h3><a class="anchor" href="#project-kb-fcc" aria-label="KB FCC 콜인프라 도입(STT/TA 구축) 링크">#</a></div>
+    <p class="project-summary">KB 금융 계열사의 STT/TA 연계를 위한 TA Gateway API와 SFTP·DB 내보내기 공통 모듈을 개발했습니다.</p>
+    <p class="project-context"><span>참여</span> 프리랜서로 개별 업무 진행</p>
+    <p class="project-stack">Java  ·  Spring-Boot  ·  MySQL  ·  MyBatis  ·  AWS(EC2,ECS)  ·  D&amp;#39;amo</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>KB저축은행 데이터 분석 작업 진행</li><li>KB계열사(은행, 카드, 저축은행, 손해보험, 증권, 라이프생명) TA Gateway API 백엔드 개발</li><li>공통 모듈(SFTP 다운로드/업로드, DB Table Data Export) 개발</li><li>D`amo 파일 암호화 솔루션 적용 및 관련 로직 개발</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-fitpet" data-category="backend" data-keywords="핏펫 건강 스쿼드 백엔드 헬스케어 · 백엔드 python 기반 어헤드 로직을 java·spring boot로 전환하고, 검사·케어 서비스의 백엔드 api를 개발했습니다. 스쿼드(팀) 단위로 업무 진행 2021.10.24 ~ 2022.08.18 java spring-boot jpa mysql mybatis aws(ec2,ecs,beanstalk) html5 css python으로 되어 있던 기존 어헤드 로직을 java, spring-boot 기반으로 converting 기존 로직에서 발생하던 간헐적 이슈 제거 및 성능 향상 어헤드 베이직 및 어헤드 덴탈 검사 관련 백엔드 api 개발(spring-boot, java, jpa, msa 기반) 어헤드 케어(미니보험) 개발(spring-boot, java, mybatis) 및 cs담당팀과 업무 협업 (고객 문의 응대에 대한 피드백 확인 및 빠른 커뮤니케이션 대응) 동물등록제 어드민 프론트엔드 일부 메뉴에 대한 기능 개발(react, nextjs) 프론트엔드에서 백엔드 api와 어떤 형태로 사용하는지 이해하기 위한 일부 개발 건만 진행">
+  <div class="project-date"><span>2021.10.24 ~ 2022.08.18</span><small>헬스케어 · 백엔드</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>핏펫 건강 스쿼드 백엔드</h3><a class="anchor" href="#project-fitpet" aria-label="핏펫 건강 스쿼드 백엔드 링크">#</a></div>
+    <p class="project-summary">Python 기반 어헤드 로직을 Java·Spring Boot로 전환하고, 검사·케어 서비스의 백엔드 API를 개발했습니다.</p>
+    <p class="project-context"><span>참여</span> 스쿼드(팀) 단위로 업무 진행</p>
+    <p class="project-stack">Java  ·  Spring-Boot  ·  JPA  ·  MySQL  ·  MyBatis  ·  AWS(EC2,ECS,Beanstalk)  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>Python으로 되어 있던 기존 어헤드 로직을 Java, Spring-Boot 기반으로 Converting</li><li>기존 로직에서 발생하던 간헐적 이슈 제거 및 성능 향상</li><li>어헤드 베이직 및 어헤드 덴탈 검사 관련 백엔드 API 개발(Spring-Boot, Java, JPA, MSA 기반)</li><li>어헤드 케어(미니보험) 개발(Spring-Boot, Java, MyBatis) 및 CS담당팀과 업무 협업</li><li>(고객 문의 응대에 대한 피드백 확인 및 빠른 커뮤니케이션 대응)</li><li>동물등록제 어드민 프론트엔드 일부 메뉴에 대한 기능 개발(React, NextJS)</li><li>프론트엔드에서 백엔드 API와 어떤 형태로 사용하는지 이해하기 위한 일부 개발 건만 진행</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-eqst" data-category="devops" data-keywords="eqst lms(사내 교육 시스템) 구축 보안 교육 · 플랫폼 모의해킹 실습을 위한 kubernetes 클러스터와 helm 기반 사용자별 실습 환경을 설계·구축했습니다. 1명(컨텐츠 제작은 별도 투입) 2018.12.24 ~ 2021.09.10 java jsp spring 3.x asp php docker kubernetes rancher(2.x) helm prometheus(basic) grafana(basic) vmware(basic) vsphere vcenter html5 css 시스템 초기 구축부터 현재 운영 업무까지 전체적인 pm 역할을 맡았음 rack 거치대 및 서버 장비, 케이블 포설 등 infra, network 기초 업무 작업도 협업으로 진행 기본 lms(learning management system) 및 실습환경 초기 셋팅(w/업체 지원) docker 및 kubernetes를 활용하여 cluster 구조의 실습환경 서버 구축 총 5대의 서버(master node 1대, worker node 3대, nas 중계서버 1대) kubernetes 설치 방법은 다양하지만, 손쉽게 진행을 하고자 rancher를 활용하여 진행 또한 lens라는 도구를 통해 prometheus 기반 서버 모니터링 진행 → 현재는 각 서버 내 metric, prometheus 설치 후 grafana tool을 활용하고자 변경 작업 중(ing..) 외부 parameter값에 따른 실습 환경 구축을 위해 helm chart 도입 nas 도입으로 실습 data 및 lms 중요 data backup 환경 구축 21년 07월 현재 기준 새로운 컨텐츠 실습 환경을 위해 vm(vsphere, vcenter) 환경 구축 진행 vpn서버(pfsense 오픈소스 활용) 연결을 통한 내부망에 위치한 vm 환경 실습 api를 통해 학습자가 웹페이지에서 vm 생성, 삭제가 가능하도록 구현 중(ing..) 다양한 케이스를 실습해볼 수 있도록 다양한 언어로 환경 구축(asp, php, jsp) 각 언어별에 맞춰 db역시 다양하게 구성(oracle xe 11g, mariadb, mysql, ms-sql)">
+  <div class="project-date"><span>2018.12.24 ~ 2021.09.10</span><small>보안 교육 · 플랫폼</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>EQST LMS(사내 교육 시스템) 구축</h3><a class="anchor" href="#project-eqst" aria-label="EQST LMS(사내 교육 시스템) 구축 링크">#</a></div>
+    <p class="project-summary">모의해킹 실습을 위한 Kubernetes 클러스터와 Helm 기반 사용자별 실습 환경을 설계·구축했습니다.</p>
+    <p class="project-context"><span>참여</span> 1명(컨텐츠 제작은 별도 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Spring 3.x  ·  ASP  ·  PHP  ·  Docker  ·  Kubernetes  ·  Rancher(2.x)  ·  Helm  ·  Prometheus(Basic)  ·  Grafana(Basic)  ·  VMWare(Basic)  ·  vSphere  ·  vCenter  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>시스템 초기 구축부터 현재 운영 업무까지 전체적인 PM 역할을 맡았음</li><li>Rack 거치대 및 서버 장비, 케이블 포설 등 Infra, Network 기초 업무 작업도 협업으로 진행</li><li>기본 LMS(Learning Management System) 및 실습환경 초기 셋팅(w/업체 지원)</li><li>Docker 및 Kubernetes를 활용하여 Cluster 구조의 실습환경 서버 구축</li><li>총 5대의 서버(Master Node 1대, Worker Node 3대, NAS 중계서버 1대)</li><li>Kubernetes 설치 방법은 다양하지만, 손쉽게 진행을 하고자 Rancher를 활용하여 진행</li><li>또한 Lens라는 도구를 통해 Prometheus 기반 서버 모니터링 진행</li><li>→ 현재는 각 서버 내 Metric, Prometheus 설치 후 Grafana Tool을 활용하고자 변경 작업 중(ing..)</li><li>외부 Parameter값에 따른 실습 환경 구축을 위해 Helm Chart 도입</li><li>NAS 도입으로 실습 Data 및 LMS 중요 Data Backup 환경 구축</li><li>21년 07월 현재 기준 새로운 컨텐츠 실습 환경을 위해 VM(vSphere, vCenter) 환경 구축 진행</li><li>VPN서버(pfSense 오픈소스 활용) 연결을 통한 내부망에 위치한 VM 환경 실습</li><li>API를 통해 학습자가 웹페이지에서 VM 생성, 삭제가 가능하도록 구현 중(ing..)</li><li>다양한 케이스를 실습해볼 수 있도록 다양한 언어로 환경 구축(ASP, PHP, JSP)</li><li>각 언어별에 맞춰 DB역시 다양하게 구성(Oracle XE 11g, MariaDB, MySQL, MS-SQL)</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-groupware" data-category="operations" data-keywords="사내 업무시스템(그룹웨어) 및 메일 서버, 보안 솔루션 운영 사내 it · 운영 그룹웨어·ms exchange 메일·보안 솔루션을 운영하고, 조직개편 대응 및 사내 커뮤니티 기능을 개발했습니다. 1명 2016.09.01 ~ 2018.12.23 java jsp ms-sql html5 css 그룹웨어(groupware), 메일서버, 보안솔루션 운영이 주 업무로 진행 그룹웨어(groupware) : 사내 portal 서비스(사내 게시판, 전자결재 등), 회의실 예약시스템, 연락망 운영 메일서버 : 사내 전사 정직원 메일 서버(ms exchange) 및 협력직원 메일 서버 운영 보안솔루션 : 메일 보안 솔루션(스팸 스나이퍼), 자체 s/w 보안 솔루션(softwatcher) 운영 매년 또는 분기별로 진행되는 조직개편 진행 시, 규모가 큰 시스템 반영 작업 진행 전사 공지사항을 통해 안내 및 새벽 타임까지 타 부서와 업무 협업을 안정적으로 진행 시스템을 관리해주는 타 업체 개발자와 원활한 comm.을 통해 업무 확인 및 지시 운영 업무 외에 타 부서 요청으로 부서별 community 시스템 개발(기본 crud 게시판이 포함된 페이지) java, jsp 언어를 활용, spring-framework 3.0, ms-sql을 기반으로 개발하였음">
+  <div class="project-date"><span>2016.09.01 ~ 2018.12.23</span><small>사내 IT · 운영</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>사내 업무시스템(그룹웨어) 및 메일 서버, 보안 솔루션 운영</h3><a class="anchor" href="#project-groupware" aria-label="사내 업무시스템(그룹웨어) 및 메일 서버, 보안 솔루션 운영 링크">#</a></div>
+    <p class="project-summary">그룹웨어·MS Exchange 메일·보안 솔루션을 운영하고, 조직개편 대응 및 사내 커뮤니티 기능을 개발했습니다.</p>
+    <p class="project-context"><span>참여</span> 1명</p>
+    <p class="project-stack">Java  ·  JSP  ·  MS-SQL  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>그룹웨어(Groupware), 메일서버, 보안솔루션 운영이 주 업무로 진행</li><li>그룹웨어(Groupware) : 사내 Portal 서비스(사내 게시판, 전자결재 등), 회의실 예약시스템, 연락망 운영</li><li>메일서버 : 사내 전사 정직원 메일 서버(MS Exchange) 및 협력직원 메일 서버 운영</li><li>보안솔루션 : 메일 보안 솔루션(스팸 스나이퍼), 자체 S/W 보안 솔루션(SoftWatcher) 운영</li><li>매년 또는 분기별로 진행되는 조직개편 진행 시, 규모가 큰 시스템 반영 작업 진행</li><li>전사 공지사항을 통해 안내 및 새벽 타임까지 타 부서와 업무 협업을 안정적으로 진행</li><li>시스템을 관리해주는 타 업체 개발자와 원활한 Comm.을 통해 업무 확인 및 지시</li><li>운영 업무 외에 타 부서 요청으로 부서별 Community 시스템 개발(기본 CRUD 게시판이 포함된 페이지)</li><li>Java, JSP 언어를 활용, Spring-Framework 3.0, MS-SQL을 기반으로 개발하였음</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-learningpro" data-category="operations" data-keywords="러닝프로(사내 교육 사이트) 운영 교육 · 운영 sk 관계사 러닝프로 교육 사이트의 레거시 struts 기반 시스템을 유지보수하고 외부 교육 콘텐츠 api를 연계했습니다. 1명 2015.08.24 ~ 2016.08.31 java jsp struts oracle html5 css 기존 운영 담당자 퇴사로 인수인계 절차 후 시스템 운영을 맡게 됨 오래된 레거시 시스템으로 기본 framework는 struts framework로 구성되어 있었음 복잡한 logic 구성으로 인해 기능, 설계 파악이 조금 어려웠으나 유지보수를 안정적으로 운영 개발 업무외에 운영팀(교육)과 comm.을 자주 하면서 커뮤니케이션 능력 향상 외부 교육 업체에서 제공하는 교육 contents 및 api를 활용한 연동 작업 교육 컨텐츠 형식마다 다른 api를 사용하였고 그에 맞춰 개발">
+  <div class="project-date"><span>2015.08.24 ~ 2016.08.31</span><small>교육 · 운영</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>러닝프로(사내 교육 사이트) 운영</h3><a class="anchor" href="#project-learningpro" aria-label="러닝프로(사내 교육 사이트) 운영 링크">#</a></div>
+    <p class="project-summary">SK 관계사 러닝프로 교육 사이트의 레거시 Struts 기반 시스템을 유지보수하고 외부 교육 콘텐츠 API를 연계했습니다.</p>
+    <p class="project-context"><span>참여</span> 1명</p>
+    <p class="project-stack">Java  ·  JSP  ·  Struts  ·  Oracle  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>기존 운영 담당자 퇴사로 인수인계 절차 후 시스템 운영을 맡게 됨</li><li>오래된 레거시 시스템으로 기본 Framework는 Struts Framework로 구성되어 있었음</li><li>복잡한 Logic 구성으로 인해 기능, 설계 파악이 조금 어려웠으나 유지보수를 안정적으로 운영</li><li>개발 업무외에 운영팀(교육)과 Comm.을 자주 하면서 커뮤니케이션 능력 향상</li><li>외부 교육 업체에서 제공하는 교육 Contents 및 API를 활용한 연동 작업</li><li>교육 컨텐츠 형식마다 다른 API를 사용하였고 그에 맞춰 개발</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-judicial" data-category="education" data-keywords="사법연수원 1,2차 고도화 이러닝 구축 공공 교육 · 구축 사법연수원 법관 교육 시스템의 구축·고도화 과정에 참여하여 ldap 회원 동기화와 메일 연계를 개발했습니다. 2~3명(1차는 sub 개발 업무로 투입, 2차는 main 개발 업무로 투입) 1차 : 2013.11.01 ~ 2014.01.30 / 2차 : 2014.10.01 ~ 2015.01.31 java jsp struts oracle ldap html5 css 1차 구축은 고객이 원하는 기능에 대한 기획 설계 및 연수원 회원 db 연동 방안 고려 2차 구축은 학습자 사이트 ui 디자인 개편 및 외부 메일 서비스(thundermail) 연동, db 이중화 작업 진행 회원 연동은 spring ldap 기능을 통한 동기화 및 batch 기능 추가 개발">
+  <div class="project-date"><span>1차 : 2013.11.01 ~ 2014.01.30 / 2차 : 2014.10.01 ~ 2015.01.31</span><small>공공 교육 · 구축</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>사법연수원 1,2차 고도화 이러닝 구축</h3><a class="anchor" href="#project-judicial" aria-label="사법연수원 1,2차 고도화 이러닝 구축 링크">#</a></div>
+    <p class="project-summary">사법연수원 법관 교육 시스템의 구축·고도화 과정에 참여하여 LDAP 회원 동기화와 메일 연계를 개발했습니다.</p>
+    <p class="project-context"><span>참여</span> 2~3명(1차는 Sub 개발 업무로 투입, 2차는 Main 개발 업무로 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Struts  ·  Oracle  ·  LDAP  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>1차 구축은 고객이 원하는 기능에 대한 기획 설계 및 연수원 회원 DB 연동 방안 고려</li><li>2차 구축은 학습자 사이트 UI 디자인 개편 및 외부 메일 서비스(ThunderMail) 연동, DB 이중화 작업 진행</li><li>회원 연동은 Spring LDAP 기능을 통한 동기화 및 Batch 기능 추가 개발</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-kifin" data-category="education" data-keywords="금융투자협회 이러닝 시스템 구축 금융 교육 · 개선 온라인·집합교육을 통합 운영하는 금융투자협회 이러닝 시스템에서 오류 개선과 결제·세금계산서 기능을 구현했습니다. 3명(main 개발 업무로 투입) 2014.06.01 ~ 2014.09.30 java jsp spring 3.x oracle html5 css 관리자 및 학습자 사이트 기존 개발 오류 수정 기존 시스템이 거의 1page당 3-4개 오류가 나올 정도로 심각한 수준이었다 보니 리뉴얼 수준으로 개선 금융업체 이러닝 교육 시스템이다 보니 일반 이러닝 시스템보다 많은 기능이 필요하였음 타 lms에 없는 세금계산서 영수, 발급 등 발행 관련 기능 연동 추가 결제 모듈(이니시스), 파일업로드(이노릭스) 연동 추가 대관 현황 예약 기능, 오프라인(집합) 과정/온라인 과정 교육 구분하여 구성 as-is 사이트 기능과 to-be 사이트 기능 비교 후 추가 요건 개발 진행">
+  <div class="project-date"><span>2014.06.01 ~ 2014.09.30</span><small>금융 교육 · 개선</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>금융투자협회 이러닝 시스템 구축</h3><a class="anchor" href="#project-kifin" aria-label="금융투자협회 이러닝 시스템 구축 링크">#</a></div>
+    <p class="project-summary">온라인·집합교육을 통합 운영하는 금융투자협회 이러닝 시스템에서 오류 개선과 결제·세금계산서 기능을 구현했습니다.</p>
+    <p class="project-context"><span>참여</span> 3명(Main 개발 업무로 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Spring 3.x  ·  Oracle  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>관리자 및 학습자 사이트 기존 개발 오류 수정</li><li>기존 시스템이 거의 1Page당 3-4개 오류가 나올 정도로 심각한 수준이었다 보니 리뉴얼 수준으로 개선</li><li>금융업체 이러닝 교육 시스템이다 보니 일반 이러닝 시스템보다 많은 기능이 필요하였음</li><li>타 LMS에 없는 세금계산서 영수, 발급 등 발행 관련 기능 연동 추가</li><li>결제 모듈(이니시스), 파일업로드(이노릭스) 연동 추가</li><li>대관 현황 예약 기능, 오프라인(집합) 과정/온라인 과정 교육 구분하여 구성</li><li>AS-IS 사이트 기능과 TO-BE 사이트 기능 비교 후 추가 요건 개발 진행</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-health-edu" data-category="education" data-keywords="보건산업교육본부 이러닝 개발 공공 교육 · 구축 글로벌헬스케어 학습자 서비스에 이력서·게시판 기능과 oz report 기반 수료증 발급을 개발했습니다. 5명(sub 개발 업무로 투입) 2014.02.01 ~ 2014.05.31 java jsp spring 3.x oracle html5 css 학습자 이력서 등록 및 일반 게시판(crud) 기능 개발 리포팅툴 저작도구를 활용한 수료증 및 발급 증명서 개발 및 연동 작업 과정 수료 후 나오는 수료증에 대해 3rd party tool(oz report)를 활용하여 작업">
+  <div class="project-date"><span>2014.02.01 ~ 2014.05.31</span><small>공공 교육 · 구축</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>보건산업교육본부 이러닝 개발</h3><a class="anchor" href="#project-health-edu" aria-label="보건산업교육본부 이러닝 개발 링크">#</a></div>
+    <p class="project-summary">글로벌헬스케어 학습자 서비스에 이력서·게시판 기능과 OZ Report 기반 수료증 발급을 개발했습니다.</p>
+    <p class="project-context"><span>참여</span> 5명(Sub 개발 업무로 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Spring 3.x  ·  Oracle  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>학습자 이력서 등록 및 일반 게시판(CRUD) 기능 개발</li><li>리포팅툴 저작도구를 활용한 수료증 및 발급 증명서 개발 및 연동 작업</li><li>과정 수료 후 나오는 수료증에 대해 3rd Party Tool(OZ Report)를 활용하여 작업</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-startup-school" data-category="education" data-keywords="창업스쿨 온라인 교육 시스템 구축 교육 · 구축 창업스쿨 학습자·관리자 사이트를 리뉴얼하고 db 이전과 jeus·webtob 서버 구성을 수행했습니다. 2명(sub 개발 업무로 투입) 2013.07.01 ~ 2013.10.31 java jsp spring 3.x jeus webtob ms-sql html5 css 창업스쿨 학습자 및 관리자 사이트 전체적인 리뉴얼 개편 작업 진행 복잡한 기능이 많이 들어가는 사이트가 아니었으므로 기능 개선보다는 ui 리뉴얼 작업이 중점적 당시 유행하고 있던 윈도우8 메트로 ui 디자인에 맞춰 front-page 구성 처음으로 db 마이그레이션 작업 진행 입사 후 처음으로 기존 시스템 db(to-be)에서 신규 시스템 db(as-is)로 이전 작업 진행 tmaxsoft 서버 jeus(was)/webtob(web) 서버를 활용하여 시스템 서버 구성">
+  <div class="project-date"><span>2013.07.01 ~ 2013.10.31</span><small>교육 · 구축</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>창업스쿨 온라인 교육 시스템 구축</h3><a class="anchor" href="#project-startup-school" aria-label="창업스쿨 온라인 교육 시스템 구축 링크">#</a></div>
+    <p class="project-summary">창업스쿨 학습자·관리자 사이트를 리뉴얼하고 DB 이전과 JEUS·WebtoB 서버 구성을 수행했습니다.</p>
+    <p class="project-context"><span>참여</span> 2명(Sub 개발 업무로 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Spring 3.x  ·  JEUS  ·  WebtoB  ·  MS-SQL  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>창업스쿨 학습자 및 관리자 사이트 전체적인 리뉴얼 개편 작업 진행</li><li>복잡한 기능이 많이 들어가는 사이트가 아니었으므로 기능 개선보다는 UI 리뉴얼 작업이 중점적</li><li>당시 유행하고 있던 윈도우8 메트로 UI 디자인에 맞춰 Front-Page 구성</li><li>처음으로 DB 마이그레이션 작업 진행</li><li>입사 후 처음으로 기존 시스템 DB(TO-BE)에서 신규 시스템 DB(AS-IS)로 이전 작업 진행</li><li>TmaxSoft 서버 JEUS(WAS)/WebtoB(WEB) 서버를 활용하여 시스템 서버 구성</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-avalon" data-category="education" data-keywords="아발론 문제은행 시스템 구축 교육 · 구축 오프라인 시험을 온라인으로 확장하는 문제은행에서 다양한 문제 유형과 학습자 랭킹 기능을 개발했습니다. 3명(sub 개발 업무로 투입) 2013.03.01 ~ 2013.06.30 java jsp spring 2.x ms-sql jeus webtob html5 css 학습자 페이지 문제은행 시스템 개발 진행 기존 오프라인에서만 풀어볼 수 있는 문제은행 시험을 온라인에서도 풀 수 있도록 한 것이 포인트 사용자 needs에 맞춰 퀴즈 문제의 다양화(객관식, 단답형, 주관식) 방식 구현 단순히 객관식, 주관식 뿐만이 아닌 중간에 괄호넣기 문제, 서술형 문제 등으로 구성 관리자 입장에서도 다양하게 범위에서 문제 제출이 가능하도록 구성 시험 응시 후 학습자 간 랭킹 순위를 표시하여 학생들간 경쟁심 유발, 성적 우수자 표창도 가능하도록 구성">
+  <div class="project-date"><span>2013.03.01 ~ 2013.06.30</span><small>교육 · 구축</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>아발론 문제은행 시스템 구축</h3><a class="anchor" href="#project-avalon" aria-label="아발론 문제은행 시스템 구축 링크">#</a></div>
+    <p class="project-summary">오프라인 시험을 온라인으로 확장하는 문제은행에서 다양한 문제 유형과 학습자 랭킹 기능을 개발했습니다.</p>
+    <p class="project-context"><span>참여</span> 3명(Sub 개발 업무로 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Spring 2.x  ·  MS-SQL  ·  JEUS  ·  WebtoB  ·  HTML5  ·  CSS</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>학습자 페이지 문제은행 시스템 개발 진행</li><li>기존 오프라인에서만 풀어볼 수 있는 문제은행 시험을 온라인에서도 풀 수 있도록 한 것이 포인트</li><li>사용자 Needs에 맞춰 퀴즈 문제의 다양화(객관식, 단답형, 주관식) 방식 구현</li><li>단순히 객관식, 주관식 뿐만이 아닌 중간에 괄호넣기 문제, 서술형 문제 등으로 구성</li><li>관리자 입장에서도 다양하게 범위에서 문제 제출이 가능하도록 구성</li><li>시험 응시 후 학습자 간 랭킹 순위를 표시하여 학생들간 경쟁심 유발, 성적 우수자 표창도 가능하도록 구성</li></ul></div>
+    </details>
+  </div>
+</article>
+
+<article class="project-entry" id="project-samsung-learning" data-category="backend" data-keywords="삼성전자 러닝허브 글로벌 서비스 · 개발 삼성전자 러닝허브의 국가별 store 배치와 콘텐츠 관리 화면을 개발하며 코드 리뷰·junit 검증에 참여했습니다. 다수 투입(규모가 큰 프로젝트로 sub 개발 업무로 투입) 2012.06.01 ~ 2012.12.31 java jsp spring 2.x mysql jira hudson html5 css 2010 2013 2003 2007 2011 삼성 러닝허브 관리자 사이트 각 나라별 store batch 프로그램 작성 및 운영(hudson) 한국 뿐만 아니라 당시 미국, 프랑스 등 다양한 국가에도 제공되는 시스템이었음 나라별로 언어 및 이미지가 다르게 표현되어야 했기에 분기점 구성이 중요 상품관리/화면관리 web page 개발 모바일 서비스였기 때문에 web page는 관리자가 사용하는 페이지만 존재 코드리뷰(junit 테스트) 및 코드품질 개선 작업 진행 규모가 큰 프로젝트였다보니 운영(prod)에 배포되기 전 개발(dev), 검증(stg) 단계를 거쳐야 했음">
+  <div class="project-date"><span>2012.06.01 ~ 2012.12.31</span><small>글로벌 서비스 · 개발</small></div>
+  <div class="project-details-area">
+    <div class="project-line"><h3>삼성전자 러닝허브</h3><a class="anchor" href="#project-samsung-learning" aria-label="삼성전자 러닝허브 링크">#</a></div>
+    <p class="project-summary">삼성전자 러닝허브의 국가별 Store 배치와 콘텐츠 관리 화면을 개발하며 코드 리뷰·JUnit 검증에 참여했습니다.</p>
+    <p class="project-context"><span>참여</span> 다수 투입(규모가 큰 프로젝트로 Sub 개발 업무로 투입)</p>
+    <p class="project-stack">Java  ·  JSP  ·  Spring 2.x  ·  MySQL  ·  JIRA  ·  Hudson  ·  HTML5  ·  CSS  ·  2010  ·  2013  ·  2003  ·  2007  ·  2011</p>
+    <details class="project-expand" >
+      <summary>담당 업무 자세히 보기 <span aria-hidden="true">+</span></summary>
+      <div class="detail-body"><ul><li>삼성 러닝허브 관리자 사이트 각 나라별 Store Batch 프로그램 작성 및 운영(Hudson)</li><li>한국 뿐만 아니라 당시 미국, 프랑스 등 다양한 국가에도 제공되는 시스템이었음</li><li>나라별로 언어 및 이미지가 다르게 표현되어야 했기에 분기점 구성이 중요</li><li>상품관리/화면관리 Web Page 개발</li><li>모바일 서비스였기 때문에 Web Page는 관리자가 사용하는 페이지만 존재</li><li>코드리뷰(JUnit 테스트) 및 코드품질 개선 작업 진행</li><li>규모가 큰 프로젝트였다보니 운영(Prod)에 배포되기 전 개발(Dev), 검증(Stg) 단계를 거쳐야 했음</li></ul></div>
+    </details>
+  </div>
+</article></div>
+  <p id="visible-count" class="note" role="status" aria-live="polite">12개</p>
+ </section>
+ <section class="section" id="career">
+  <div class="section-hd"><h2>경력</h2></div>
+  <p class="section-intro">회사 및 프로젝트 참여 기간은 <a href="https://yeops.notion.site/Portfolio-a13980c2a70b4f1f9e32e2f1b80fc193" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;text-underline-offset:3px">Notion 원문</a>에 기록된 기준을 사용했습니다. 2026년 2월 이후 이력은 반영하지 않았습니다.</p>
+  <div class="timeline"><div class="career-row"><time>2023.08 — 2026.02</time><div><h3>중소기업중앙회</h3><p>대내외 시스템 유지보수 및 API 연계 (프리랜서)</p></div></div><div class="career-row"><time>2022.12 — 2023.06</time><div><h3>KB FCC 콜인프라 구축</h3><p>TA Gateway API 및 공통 모듈 개발</p></div></div><div class="career-row"><time>2021.10 — 2022.08</time><div><h3>핏펫</h3><p>건강 스쿼드 백엔드 엔지니어</p></div></div><div class="career-row"><time>2015.08 — 2021.09</time><div><h3>러닝프로 · SK인포섹 / ADT캡스 관련 업무</h3><p>교육시스템·그룹웨어 운영, EQST LMS 구축</p></div></div><div class="career-row"><time>2012.03 — 2015.07</time><div><h3>포씨소프트</h3><p>이러닝 개발팀 · 구축 및 고도화 프로젝트</p></div></div></div>
+ </section>
+ <section class="section" id="skills">
+  <div class="section-hd"><h2>사용 기술</h2></div>
+  <p class="section-intro">직접 경험한 기술을 영역별로 구분했습니다. 기술마다 사용 기간과 숙련도는 다릅니다.</p>
+  <dl class="skills">
+   <dt>Backend</dt><dd>Java, JSP, Spring 2.x / 3.x, Spring Boot, Struts, MyBatis, JPA</dd>
+   <dt>Database</dt><dd>Oracle, MySQL, MariaDB, MS-SQL, DB2</dd>
+   <dt>Infrastructure</dt><dd>Docker, Kubernetes, Helm, Rancher, AWS EC2 / ECS / Beanstalk</dd>
+   <dt>Operations</dt><dd>Apache, Tomcat, JEUS, WebtoB, Git / SVN, Jenkins / Hudson, Prometheus, Grafana</dd>
+  </dl>
+ </section>
+ <section class="section philosophy" id="about">
+  <div class="section-hd"><h2>일하는 방식</h2></div>
+  <p>처음 경험하는 기술도 업무에 필요하다면 직접 학습하고 적용합니다. EQST LMS를 구축할 때에는 Docker와 Kubernetes로 실습 클러스터를 만들고, Helm을 사용해 학습자별 실습 환경을 구성했습니다.</p>
+  <p>핏펫에서는 Python으로 작성된 기존 백엔드 로직을 분석해 Java·Spring Boot 기반으로 전환했습니다. 기능 구현뿐 아니라 기존 시스템에 어떤 영향이 있는지 확인하고, 운영 중 발생하는 문제를 줄이는 일을 중요하게 생각합니다.</p>
+ </section>
+ <section class="section" id="side">
+  <div class="section-hd"><h2>개인 프로젝트</h2></div>
+  <p class="section-intro">업무 외에 취미로 만들고 운영하는 서비스입니다. 위의 업무 경력과는 별도로 소개합니다.</p>
+  <div class="side-projects">
+   <a class="side-project" href="https://mir.yeop.net/" target="_blank" rel="noopener noreferrer"><img src="https://mir.yeop.net/_yeop_releases/r20261012011635_6696928e/icon_img.png" alt="" loading="lazy"><div><strong>미르 × 청운밴드 팬아카이브</strong><span>영상과 공연 기록을 정리하는 팬사이트</span></div><span class="arrow">↗</span></a>
+   <a class="side-project" href="https://isegye-idol.kr/" target="_blank" rel="noopener noreferrer"><img src="https://raw.githubusercontent.com/seirian/isegye-idol-fansite/main/assets/favicon.svg" alt="" loading="lazy"><div><strong>이세계아이돌 팬사이트</strong><span>음악과 활동을 정리하는 팬아카이브</span></div><span class="arrow">↗</span></a>
+   <a class="side-project" href="https://subculture-radar-kr-sy.sengyb.chatgpt.site/" target="_blank" rel="noopener noreferrer"><img src="https://subculture-radar-kr-sy.sengyb.chatgpt.site/favicon.svg" alt="" loading="lazy"><div><strong>서브레이더</strong><span>서브컬처 오프라인 행사 및 예약 정보</span></div><span class="arrow">↗</span></a>
+  </div>
+ </section>
+ <section class="contact-section" id="contact"><h2>더 좋은 서비스를 함께 고민하겠습니다.</h2><p>프로젝트나 업무 관련 연락은 <a href="mailto:sengyb@daum.net">sengyb@daum.net</a>으로 부탁드립니다.</p></section>
+ <footer class="footer">정성엽 · 개발자 포트폴리오 / 기존 사이트와 분리된 디자인 검토 시안</footer>
+</main></div>
+<script>(() => {
+"use strict";
+const options=[...document.querySelectorAll("[data-category-filter]")];
+const projects=[...document.querySelectorAll(".project-entry")];
+const counter=document.getElementById("visible-count");
+for(const option of options){
+  option.addEventListener("click",()=>{
+    const selected=option.dataset.categoryFilter;
+    let shown=0;
+    for(const entry of projects){
+      const show=selected==="all"||entry.dataset.category===selected;
+      entry.hidden=!show;
+      if(show)shown+=1;
+    }
+    for(const tab of options){
+      const active=tab===option;
+      tab.classList.toggle("active",active);
+      tab.setAttribute("aria-pressed",String(active));
+    }
+    if(counter)counter.textContent=shown+"개";
+  });
+}
+document.querySelectorAll(".project-expand").forEach(d=>{
+ d.addEventListener("toggle",()=>{
+   const summary=d.querySelector("summary");
+   if(summary)summary.firstChild.textContent=d.open?"담당 업무 접기 ":"담당 업무 자세히 보기 ";
+ });
+});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+name: Import portfolio Notion avatar
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'scripts/notion-avatar-source.txt'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: portfolio-avatar-import
+  cancel-in-progress: false
+jobs:
+  import:
+    if: github.repository == 'seirian/seirian.github.io' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install --disable-pip-version-check pillow==11.3.0
+      - name: Download validated user's Notion photo and create local asset
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          from urllib.request import Request, urlopen
+          from io import BytesIO
+          from PIL import Image, ImageOps
+          url_path = Path('scripts/notion-avatar-source.txt')
+          if not url_path.is_file():
+              raise SystemExit('Avatar URL file not present')
+          url = url_path.read_text().strip()
+          parsed = urlsplit(url)
+          assert parsed.scheme == 'https' and parsed.hostname == 'prod-files-secure.s3.us-west-2.amazonaws.com'
+          assert parsed.path.endswith('/yeop1.jpg') and len(url) < 4000
+          with urlopen(Request(url, headers={'User-Agent':'YeopPortfolioAssetImport/1.0'}), timeout=22) as response:
+              assert response.geturl() == url
+              raw = response.read(8 * 1024 * 1024 + 1)
+          assert raw[:3] == b'\xff\xd8\xff' and 2000 < len(raw) < 8 * 1024 * 1024
+          photo = Image.open(BytesIO(raw))
+          photo = ImageOps.exif_transpose(photo).convert('RGB')
+          assert photo.width >= 100 and photo.height >= 100
+          # Keep the hat in frame by biasing crop to the upper third.
+          icon = ImageOps.fit(photo, (256, 256), method=Image.Resampling.LANCZOS, centering=(0.5, 0.37))
+          dest = Path('site/assets/avatar-yeop.webp')
+          dest.parent.mkdir(parents=True, exist_ok=True)
+          icon.save(dest, 'WEBP', quality=84, method=6)
+          assert dest.stat().st_size < 90_000
+          print('Imported and resized original Notion profile photograph.')
+          PY
+      - name: Commit durable binary without temporary signed URL
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add site/assets/avatar-yeop.webp
+          git rm -q scripts/notion-avatar-source.txt
+          git commit -m "assets: import original straw-hat Notion portrait" 
+          git push origin HEAD:develop

@@ -3,13 +3,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root=path.resolve("site");
-const expected=["index.html","assets/site.css","assets/site.js","assets/favicon.svg","assets/avatar-yeop.webp","robots.txt","sitemap.xml"];
+const expected=["index.html","assets/site.css","assets/site.js","assets/favicon.svg","assets/avatar-yeop.webp","assets/og-portfolio.jpg","robots.txt","sitemap.xml"];
 const files=Object.fromEntries(expected.map(name=>{
   const file=path.join(root,name);
   const stat=fs.lstatSync(file);
   assert.ok(stat.isFile()&&!stat.isSymbolicLink(),"Invalid asset: "+name);
   assert.ok(stat.size>0 && stat.size<180_000,"Invalid asset size: "+name);
-  return [name,name.endsWith(".webp")?fs.readFileSync(file):fs.readFileSync(file,"utf8")];
+  return [name,/\.(?:webp|jpg)$/.test(name)?fs.readFileSync(file):fs.readFileSync(file,"utf8")];
 }));
 const html=files["index.html"];
 assert.match(html,/<html lang="ko"/);
@@ -62,6 +62,19 @@ assert.ok(html.includes('raw.githubusercontent.com/seirian/isegye-idol-fansite/m
 assert.ok(html.includes('subculture-radar-kr-sy.sengyb.chatgpt.site/favicon.svg'),"Use live Subradar favicon");
 assert.equal(files["assets/avatar-yeop.webp"].toString("ascii",0,4),"RIFF","Notion portrait must be real WEBP");
 assert.ok(files["assets/avatar-yeop.webp"].length>1000,"Notion portrait is unexpectedly small");
+// Crawlers must find an explicit and unique OG image without executing JavaScript.
+const ogExpected="https://yeop.net/_portfolio_releases/__PORTFOLIO_RELEASE__/assets/og-portfolio.jpg";
+assert.ok(html.includes('<meta property="og:image" content="'+ogExpected+'">'),"Missing OG image");
+assert.ok(html.includes('<meta property="og:image:secure_url" content="'+ogExpected+'">'),"Missing OG secure URL");
+assert.ok(html.includes('<meta name="twitter:image" content="'+ogExpected+'">'),"Missing Twitter image");
+assert.ok(html.includes('<meta property="og:image:width" content="1200">'),"OG dimensions missing");
+assert.ok(html.includes('<meta property="og:image:height" content="630">'),"OG dimensions missing");
+assert.ok(html.includes('<meta property="og:image:type" content="image/jpeg">'),"OG MIME missing");
+assert.ok(html.includes('<meta name="twitter:card" content="summary_large_image">'),"Twitter card missing");
+assert.equal((html.match(/property="og:image"/g)||[]).length,1,"Only one OG primary image allowed");
+assert.ok(!html.slice(0,html.indexOf("</head>")).includes("mir.yeop.net"),"MIR brand must not be in portfolio head");
+assert.equal(files["assets/og-portfolio.jpg"].subarray(0,3).toString("hex"),"ffd8ff","Social image must be real JPEG");
+assert.ok(files["assets/og-portfolio.jpg"].length>20000,"OG image unexpectedly small");
 assert.ok(!html.includes("1984. 09. 25"),"Do not publish birth date");
 assert.ok(!html.includes("남부순환로"),"Do not publish home address");
 assert.match(files["assets/site.css"],/@media \(max-width:580px\)/);

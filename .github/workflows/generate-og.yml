@@ -1,0 +1,62 @@
+name: Generate portfolio social preview
+
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'scripts/generate-og.py'
+      - 'site/assets/avatar-yeop.webp'
+      - '.github/workflows/generate-og.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: yeop-social-image-generation
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.repository == 'seirian/seirian.github.io' && github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned image tooling
+        run: python -m pip install --disable-pip-version-check pillow==11.3.0
+      - name: Generate 1200x630 social image from original Notion photo
+        run: python scripts/generate-og.py
+      - name: Verify JPEG dimensions, type and embedded user photo
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          original = Path('site/assets/avatar-yeop.webp')
+          image = Path('site/assets/og-portfolio.jpg')
+          assert original.read_bytes()[:4] == b'RIFF'
+          assert image.read_bytes()[:3] == b'\xff\xd8\xff'
+          assert 10000 < image.stat().st_size < 175000
+          with Image.open(image) as src:
+              assert src.size == (1200, 630)
+              assert src.format == 'JPEG'
+          print('Verified social preview JPEG', image.stat().st_size)
+          PY
+      - name: Commit image to develop, without changing production main
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add site/assets/og-portfolio.jpg
+          if git diff --cached --quiet; then
+            echo 'Image is already current.'
+          else
+            git commit -m 'assets: generate Notion-portrait Open Graph share image'
+            git pull --rebase origin develop
+            git push origin HEAD:develop
+          fi

@@ -6,27 +6,27 @@
   const mobileNav = document.getElementById("mobile-nav");
   const year = document.getElementById("copyright-year");
   const progress = document.getElementById("scroll-progress");
-  const filterButtons = [...document.querySelectorAll("[data-filter]")];
-  const projectCards = [...document.querySelectorAll("[data-category]")];
+  const headerLinks = [...document.querySelectorAll(".desktop-nav a")];
+  const sections = headerLinks.map((link) => document.getElementById(link.hash.slice(1))).filter(Boolean);
 
   const storedTheme = (() => {
     try { return window.localStorage.getItem("yeop-portfolio-theme"); }
     catch { return null; }
   })();
-  if (storedTheme === "dark" || storedTheme === "light") root.dataset.theme = storedTheme;
+  if (storedTheme === "light" || storedTheme === "dark") root.dataset.theme = storedTheme;
 
   const setTheme = (theme) => {
-    root.dataset.theme = theme;
-    const isLight = theme === "light";
-    themeButton?.setAttribute("aria-label", isLight ? "다크 모드로 전환" : "라이트 모드로 전환");
-    themeButton?.setAttribute("title", isLight ? "다크 모드" : "라이트 모드");
+    const light = theme === "light";
+    root.dataset.theme = light ? "light" : "dark";
+    themeButton?.setAttribute("aria-label", light ? "다크 모드로 전환" : "라이트 모드로 전환");
+    themeButton?.setAttribute("title", light ? "다크 모드" : "라이트 모드");
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = isLight ? "#f7f8f4" : "#10131d";
+    if (meta) meta.content = light ? "#f7f7f4" : "#0e1513";
     try { window.localStorage.setItem("yeop-portfolio-theme", theme); }
-    catch { /* Private browsing must not break site interactions. */ }
+    catch { /* Storage may be disabled in private mode. */ }
   };
-  setTheme(root.dataset.theme === "light" ? "light" : "dark");
-  themeButton?.addEventListener("click", () => setTheme(root.dataset.theme === "light" ? "dark" : "light"));
+  setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+  themeButton?.addEventListener("click", () => setTheme(root.dataset.theme === "dark" ? "light" : "dark"));
 
   const closeMenu = () => {
     if (!mobileNav || !menuButton) return;
@@ -36,29 +36,18 @@
   };
   menuButton?.addEventListener("click", () => {
     if (!mobileNav) return;
-    const opening = mobileNav.hidden;
-    mobileNav.hidden = !opening;
-    menuButton.setAttribute("aria-expanded", String(opening));
-    menuButton.setAttribute("aria-label", opening ? "모바일 메뉴 닫기" : "모바일 메뉴 열기");
+    const open = mobileNav.hidden;
+    mobileNav.hidden = !open;
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "모바일 메뉴 닫기" : "모바일 메뉴 열기");
   });
   mobileNav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-  window.addEventListener("resize", () => { if (window.innerWidth > 780) closeMenu(); }, { passive: true });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 870) closeMenu();
+  }, { passive: true });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeMenu();
   });
-
-  filterButtons.forEach((button) => button.addEventListener("click", () => {
-    const selected = button.dataset.filter;
-    filterButtons.forEach((item) => {
-      const active = item === button;
-      item.classList.toggle("is-active", active);
-      item.setAttribute("aria-pressed", String(active));
-    });
-    projectCards.forEach((card) => {
-      const categories = (card.dataset.category || "").split(/\s+/);
-      card.hidden = selected !== "all" && !categories.includes(selected);
-    });
-  }));
 
   if (year) year.textContent = String(new Date().getFullYear());
   if (progress) {
@@ -77,5 +66,20 @@
     }, { passive: true });
     window.addEventListener("resize", update, { passive: true });
     update();
+  }
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        headerLinks.forEach((link) => {
+          const current = link.hash === "#" + entry.target.id;
+          link.classList.toggle("is-current", current);
+          if (current) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      }
+    }, { rootMargin: "-23% 0px -62% 0px", threshold: 0 });
+    sections.forEach((section) => observer.observe(section));
   }
 })();

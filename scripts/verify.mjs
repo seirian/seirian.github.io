@@ -35,6 +35,21 @@ for(const project of projectIds){
   assert.ok(html.includes('href="#project-'+project+'"'),"Missing deep link: "+project);
 }
 assert.equal((html.match(/class="side-link"/g)||[]).length,3,"Exactly 3 compact hobby links");
+
+const heroText=(html.match(/<p class="hero-description">([\s\S]*?)<\/p>/)||[])[1]||"";
+assert.ok(heroText.includes("API 개발부터 레거시 개선, 데이터 연동, 시스템 운영 등"),"Updated hero summary is missing");
+assert.ok(!heroText.includes("시스템 운영과 인프라 구성"),"Previous hero wording must be removed");
+assert.ok(html.includes('class="ai-development-note"'),"Side projects must explain AI-assisted development");
+assert.ok(html.includes("AI 개발 도구 Codex"),"Codex must be named in the side-project introduction");
+assert.ok(html.includes("Codex와 함께 코드를 작성·개선"),"AI assistance must describe a concrete development workflow");
+assert.ok(html.includes("직접 검증·운영"),"Human oversight and production operation must be clear");
+assert.ok(html.indexOf('id="side"')<html.indexOf('class="ai-development-note"') &&
+  html.indexOf('class="ai-development-note"')<html.indexOf('class="side-list"'),
+  "AI-assisted description belongs inside the side-project section before the projects");
+assert.ok(html.indexOf('id="work"')<html.indexOf('class="ai-development-note"'),
+  "AI hobby projects must not replace professional work");
+assert.match(files["assets/site.css"],/\.ai-development-note/);
+
 assert.ok(html.indexOf('id="project-sme"')<html.indexOf('id="side"'),"Professional work must precede hobbies");
 assert.ok(html.indexOf('id="career"')<html.indexOf('id="side"'),"Career must precede hobbies");
 assert.ok(html.indexOf('id="skills"')<html.indexOf('id="side"'),"Skills must precede hobbies");

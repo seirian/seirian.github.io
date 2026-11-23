@@ -713,3 +713,65 @@ body {font-size:16px;line-height:1.82}
   .contact-links a,.contact-section p:not(.kicker) {font-size:14px}
   .footer-inner p,.top-link {font-size:12px}
 }
+
+/* Personal projects: make the AI-assisted development process explicit without
+   changing the professional portfolio's hierarchy. */
+.ai-development-note{
+  display:grid;
+  grid-template-columns:minmax(195px,.75fr) minmax(0,1.25fr);
+  column-gap:32px;
+  row-gap:13px;
+  padding:24px 0 27px;
+  margin:0 0 24px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.ai-development-header{display:flex;flex-direction:column;gap:8px}
+.ai-development-label{
+  font-size:11.5px;
+  font-weight:850;
+  letter-spacing:.1em;
+  line-height:1.5;
+  color:var(--accent);
+}
+.ai-development-header strong{
+  font-size:17px;
+  letter-spacing:-.035em;
+  line-height:1.55;
+  color:var(--heading);
+}
+.ai-development-note>p{
+  margin:0;
+  color:var(--secondary);
+  font-size:14.5px;
+  line-height:1.85;
+  word-break:keep-all;
+}
+.ai-development-steps{
+  grid-column:2;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  column-gap:9px;
+  row-gap:5px;
+  color:var(--secondary);
+  font-size:12.5px;
+  line-height:1.7;
+  font-weight:700;
+}
+.ai-development-steps span:not(:last-child)::after{
+  content:"→";
+  display:inline-block;
+  margin-left:9px;
+  color:var(--accent);
+}
+@media(max-width:870px){
+  .ai-development-note{grid-template-columns:1fr;gap:10px}
+  .ai-development-steps{grid-column:1}
+}
+@media(max-width:580px){
+  .ai-development-note{padding:21px 0 24px;margin-bottom:20px}
+  .ai-development-header strong{font-size:16px}
+  .ai-development-note>p{font-size:14px}
+  .ai-development-steps{font-size:12px}
+}

@@ -15,7 +15,7 @@ SFTP secret. The existing repository seirian/mir-cheongwoon-site owns the
 server credential and a pinned SSH server key. A **separately scoped**
 scheduled Actions workflow in that repository checks ONLY the portfolio
 repository main branch for new commits, then uses its existing secret to
-upload the six approved static files. No portfolio code is executed in
+upload the approved static files. No portfolio code is executed in
 the privileged runner. Scheduled runs that see no change are no-ops.
 
 The pipeline stages immutable releases at:
@@ -30,6 +30,11 @@ and current MIR health. Stage: upload only allowlisted static files and
 verify byte-for-byte over SFTP and HTTP. Activate: atomically replace the
 portfolio routing block. Verify: yeop.net and mir.yeop.net both succeed.
 On verification failure: restore the previous routing block only.
+
+The main portfolio at `/` links to the simplified portfolio at `/simple/`.
+Both pages, their static assets and the simplified profile JPEG are staged
+in the same release. Activation verifies the simplified route with the main
+portfolio and the MIR service before completing the deployment.
 
 IMPORTANT: No files are removed, overwritten or moved in MIR paths.
 Shared root index files are not modified. The original root's

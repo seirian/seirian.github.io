@@ -103,4 +103,21 @@ assert.match(files["assets/site.js"],/project-search/);
 assert.match(files["robots.txt"],/Sitemap: https:\/\/yeop\.net\/sitemap\.xml/);
 assert.match(files["sitemap.xml"],/<loc>https:\/\/yeop\.net\/<\/loc>/);
 assert.ok(!/(?:href|src)="http:\/\//.test(html),"Only HTTPS external resources");
+assert.match(html,/<a class="view-switch" href="\/simple\/">간소화 버전<\/a>/);
+const simple = fs.readFileSync(path.join(root, "simple/index.html"), "utf8");
+assert.match(simple,/<a class="view-switch" href="\/">기본 버전<\/a>/);
+assert.match(simple,/<h1 id="name">Yeop<\/h1>/);
+assert.equal((simple.match(/class="project-row"/g) || []).length, projectIds.length);
+for (const project of projectIds) {
+  assert.ok(simple.includes('id="project-' + project + '"'), "Missing simplified project: " + project);
+}
+assert.match(simple,/<link rel="canonical" href="https:\/\/yeop\.net\/simple\/">/);
+assert.doesNotMatch(simple, /noindex|yeop-portfolio-review/);
+const simpleOg = "https://yeop.net/_portfolio_releases/__PORTFOLIO_RELEASE__/assets/simple-profile.jpg";
+assert.equal(simple.split(simpleOg).length - 1, 3, "Use one simplified profile JPEG for social previews");
+const simpleProfile = fs.readFileSync(path.join(root, "assets/simple-profile.jpg"));
+assert.equal(simpleProfile.subarray(0, 3).toString("hex"), "ffd8ff");
+for (const [, relative] of simple.matchAll(/(?:src|href)="\.\.\/(assets\/[^"]+)"/g)) {
+  assert.ok(fs.statSync(path.join(root, relative)).isFile(), "Missing simplified asset: " + relative);
+}
 console.log("PASS: all 12 Notion professional projects, career/skills before hobbies, search/filter, privacy, responsive UI and SEO");

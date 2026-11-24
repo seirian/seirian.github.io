@@ -40,6 +40,11 @@ jobs:
           from pathlib import Path
           files = {p.relative_to('dist').as_posix() for p in Path('dist').rglob('*') if p.is_file()}
           expected = {'index.html','assets/site.css','assets/site.js','assets/favicon.svg','assets/avatar-yeop.webp','assets/og-portfolio.jpg','robots.txt','sitemap.xml'}
+          expected.update({
+            'simple/index.html','assets/simple.css','assets/simple.js',
+            'assets/simple-profile.jpg','assets/portfolio-sans.woff2','assets/font-license.txt',
+            'assets/mir.png','assets/isegye-idol.svg','assets/subradar.svg',
+          })
           assert files == expected,(files,expected)
           assert b'data-site="yeop-portfolio-v4"' in Path('dist/index.html').read_bytes()
           print('Validated publication manifest:',sorted(files))

@@ -18,15 +18,17 @@ function darkModeIsOn() {
   return page.dataset.theme ? page.dataset.theme === "dark" : systemTheme.matches;
 }
 
-function labelThemeToggle() {
-  const nextTheme = darkModeIsOn() ? "라이트 모드" : "다크 모드";
-  themeToggle.textContent = nextTheme;
-  themeToggle.setAttribute("aria-label", nextTheme + "로 전환");
+function updateThemeToggle() {
+  const dark = darkModeIsOn();
+  const label = dark ? "라이트 모드로 전환" : "다크 모드로 전환";
+  themeToggle.dataset.theme = dark ? "dark" : "light";
+  themeToggle.title = label;
+  themeToggle.setAttribute("aria-label", label);
 }
 
-labelThemeToggle();
+updateThemeToggle();
 themeToggle.hidden = false;
-systemTheme.addEventListener("change", labelThemeToggle);
+systemTheme.addEventListener("change", updateThemeToggle);
 
 themeToggle.addEventListener("click", () => {
   page.dataset.theme = darkModeIsOn() ? "light" : "dark";
@@ -35,7 +37,7 @@ themeToggle.addEventListener("click", () => {
   } catch {
     // The theme still applies until the page is closed.
   }
-  labelThemeToggle();
+  updateThemeToggle();
 });
 
 const search = document.getElementById("project-search");

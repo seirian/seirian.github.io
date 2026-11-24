@@ -58,6 +58,10 @@ for(const project of [
 "사법연수원","금융투자협회","보건산업교육본부","창업스쿨",
 "아발론","삼성전자 러닝허브"
 ])assert.ok(html.includes(project),"Missing Notion work title: "+project);
+assert.ok(html.includes('각 프로젝트의 수행 기간, 참여 형태, 개발 업무와 사용 기술을 직접 확인할 수 있습니다.'),"Project introduction should focus on visitor value");
+assert.ok(!html.includes('원본 Notion에 기록된 <strong>업무 프로젝트 12개 전체</strong>를 이관했습니다.'),"Internal migration wording must not appear publicly");
+assert.ok(html.includes('그룹웨어 운영과 중소기업중앙회 현업 담당자와의 협업 등'),"SME business stakeholder collaboration must be featured");
+assert.ok(!html.includes('핏펫의 CS 협업'),"Outdated collaboration example remains");
 assert.ok(html.includes("2012.06.01 ~ 2012.12.31"));
 assert.ok(html.includes("2023.08.07 ~ 2026.02.27"));
 for(const url of [

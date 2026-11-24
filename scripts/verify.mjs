@@ -107,6 +107,22 @@ assert.match(html,/<a class="view-switch" href="\/simple\/">간소화 버전<\/a
 const simple = fs.readFileSync(path.join(root, "simple/index.html"), "utf8");
 assert.match(simple,/<a class="view-switch" href="\/">기본 버전<\/a>/);
 assert.match(simple,/<h1 id="name">Yeop<\/h1>/);
+const fullTagline = html.match(/<h1 id="hero-title">(.+?)<\/h1>/)?.[1]
+  .replaceAll("<br>", " ").replace(/<[^>]+>/g, "").trim();
+const simpleTagline = simple.match(/<p class="intro-tagline">(.+?)<\/p>/)?.[1];
+const simpleIntro = simple.match(/<p class="intro-description">(.+?)<\/p>/)?.[1];
+assert.ok(fullTagline, "Missing main tagline");
+assert.equal(simpleTagline, fullTagline, "Both views must use the same tagline");
+assert.equal(simpleIntro, heroText, "Both views must use the same introduction and emphasis");
+
+function navLinks(page, selector) {
+  const menu = page.match(selector)?.[1] ?? "";
+  return [...menu.matchAll(/<a href="(#[^"]+)">([^<]+)<\/a>/g)].map(([, target, label]) => [target, label]);
+}
+const simpleNav = navLinks(simple, /<nav aria-label="주요 메뉴">([\s\S]*?)<\/nav>/);
+assert.equal(simpleNav.length, 6, "The shared menu must have six section links");
+assert.deepEqual(navLinks(html, /<nav class="desktop-nav"[^>]*>([\s\S]*?)<\/nav>/), simpleNav);
+assert.deepEqual(navLinks(html, /<nav class="mobile-nav"[^>]*>([\s\S]*?)<\/nav>/), simpleNav);
 assert.equal((simple.match(/class="project-row"/g) || []).length, projectIds.length);
 for (const project of projectIds) {
   assert.ok(simple.includes('id="project-' + project + '"'), "Missing simplified project: " + project);
